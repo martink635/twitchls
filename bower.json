@@ -1,0 +1,22 @@
+{
+  "name": "twitchls",
+  "version": "1.0.0",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "less/!(variables).less", "dist/fonts/*", "dist/js/*", "less/mixins/*"
+      ]
+    }
+  }
+}

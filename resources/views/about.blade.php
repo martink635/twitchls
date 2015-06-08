@@ -43,7 +43,7 @@ About - twitchls
                 </ul>
                 </p>
 
-                <p>Twitchls is open source, licensed under <a href="http://opensource.org/licenses/mit-license.html">MIT License</a>, available on <a href="">Github</a>.</p>
+                <p>Twitchls is open source, licensed under <a href="http://opensource.org/licenses/mit-license.html">MIT License</a>, available on <a href="https://github.com/mkoterle/twitchls">Github</a>.</p>
 
             </div>
         </div>

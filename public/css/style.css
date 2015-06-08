@@ -61,9 +61,15 @@ iframe {
     margin-right: 20px;
 }
 
-.logo-blue {
-    color: #3F51B5;
+.logo {
+    font-weight: 300;
+    color: #333;
+}
+
+.logo .blue {
+    content: "hls";
     font-weight: 600;
+    color: #3F51B5;
 }
 
 .btn-on-stream, .btn-on-stream:active, .btn-on-stream:focus {

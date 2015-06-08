@@ -24,9 +24,8 @@ class StreamsController extends Controller {
         }
 
         $streams = \Cache::get('streams');
-        $data['streams'] = $streams->streams;
 
-        return view('index', $data);
+        return view('index', ['streams' => $streams]);
     }
 
     /**
@@ -38,13 +37,12 @@ class StreamsController extends Controller {
     public function show($stream)
     {
         $stream = $this->streams->get($stream);
-        $data['stream'] = $stream->stream;
 
-        if ($data['stream'] === null) {
+        if ($stream === null) {
             return redirect('/');
         }
 
-        return view('stream', $data);
+        return view('stream', ['stream' => $stream]);
     }
 
 }

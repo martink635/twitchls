@@ -44,7 +44,7 @@ class StreamsController extends Controller {
             return redirect('/');
         }
 
-        return view('show', $data);
+        return view('stream', $data);
     }
 
 }

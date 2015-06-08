@@ -18,6 +18,17 @@
 
         @yield('content')
 
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2><a href="/"><span class="logo">twitc<span class="blue">hls</span></span></a> <small>Watch Twitch HLS streams with chat. Available on <a href="https://github.com/mkoterle/twitchls">Github</a>.</small></h2>
+                        
+                    </div>
+                </div>
+            </div>
+        </footer>
+
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script src="/js/script.js"></script>

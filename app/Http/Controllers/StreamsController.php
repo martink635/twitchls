@@ -1,10 +1,12 @@
-<?php namespace App\Http\Controllers;
+<?php 
+
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Api\Streams;
 
-class StreamsController extends Controller {
-
+class StreamsController extends Controller
+{
     protected $streams;
 
     public function __construct(Streams $streams)
@@ -30,7 +32,7 @@ class StreamsController extends Controller {
 
     /**
      * Retrieves 1 stream and displays it with Twitch chat
-     * 
+     *
      * @param  string
      * @return Response
      */
@@ -44,5 +46,4 @@ class StreamsController extends Controller {
 
         return view('stream', ['stream' => $stream]);
     }
-
 }

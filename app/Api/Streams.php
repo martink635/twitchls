@@ -1,9 +1,11 @@
-<?php namespace App\Api;
+<?php 
+
+namespace App\Api;
 
 use App\Api\Twitch;
 
-class Streams {
-
+class Streams
+{
     public function __construct(Twitch $twitch)
     {
         $this->endpoint = "streams";
@@ -12,7 +14,7 @@ class Streams {
 
     /**
      * Retrieves a single stream by its name
-     * 
+     *
      * @param  string
      * @return object
      */
@@ -23,10 +25,10 @@ class Streams {
 
     /**
      * Retrieves a list of live streams
-     * 
+     *
      * By default retrieves streams for all games.
      * Twitch API limits the retrieveal to 100 streams at a time.
-     * 
+     *
      * @param  string
      * @param  integer
      * @param  integer

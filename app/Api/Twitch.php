@@ -1,9 +1,11 @@
-<?php namespace App\Api;
+<?php
+
+namespace App\Api;
 
 use GuzzleHttp\Client;
 
-class Twitch {
-
+class Twitch
+{
     /**
      * Twitch API url
      */
@@ -33,7 +35,7 @@ class Twitch {
 
     /**
      *  Twitch GET request, with options
-     * 
+     *
      * @param  string
      * @param  array
      * @return object
@@ -47,7 +49,7 @@ class Twitch {
 
     /**
      * Returns an object from the Guzzle response
-     * 
+     *
      * @param  GuzzleHttp\Psr7\Response
      * @return object
      */

@@ -28,6 +28,9 @@ a:hover {
 .stream-description {
     color: #8c8c8c;
     margin-bottom: 10px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 iframe {

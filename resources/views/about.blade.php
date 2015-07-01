@@ -18,7 +18,7 @@ About - twitchls
               <a class="navbar-brand" href="/"><span class="logo">twitc<span class="blue">hls</span></span></a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
-              
+
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="/about">About</a></li>
               </ul>
@@ -30,10 +30,10 @@ About - twitchls
 
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-                
+
                 <h1>About</h1>
 
-                <p>This is an open source project, enabling you to watch streams using the <a href="http://en.wikipedia.org/wiki/HTTP_Live_Streaming">HLS</a> techonolgy instead of Flash. It uses significantly less power on a Mac. It also has the option to display the Twitch chat, which does need Flash to load (the CPU usage for the Flash chat is insignificant compared to the video streaming).
+                <p>This is an open source project, enabling you to watch streams using the <a href="http://en.wikipedia.org/wiki/HTTP_Live_Streaming">HLS</a> techonolgy instead of Flash. It uses significantly less power on a Mac. It also has the option to display the Twitch chat, which thanks to the new Twitch.tv update also loads without using Flash.</p>
 
                 <p>HLS works only on a handful of browsers:
                 <ul>

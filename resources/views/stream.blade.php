@@ -25,7 +25,9 @@
                 </div>
 
                 <div class="chat col-md-3" id="chat">
-                    <iframe frameborder="0" scrolling="no" id="twitch_embed_chat" class="side" src="http://twitch.tv/chat/embed?channel={{ $stream->channel->name }}&amp;popout_chat=true"></iframe>
+                    <!-- <iframe frameborder="0" scrolling="no" id="twitch_embed_chat" class="side" src="http://twitch.tv/chat/embed?channel={{ $stream->channel->name }}&amp;popout_chat=true"></iframe> -->
+
+                    <iframe frameborder="0" scrolling="no" id="twitch_embed_chat" class="side" src="http://www.twitch.tv/{{ $stream->channel->name }}/chat?popout" frameborder="0" scrolling="no"></iframe>
                 </div>
             </div>
         </div>

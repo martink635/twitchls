@@ -1,3 +1,8 @@
+html {
+    max-height: 100vh;
+    overflow: hidden;
+}
+
 a:hover {
     text-decoration: none;
 }
@@ -34,8 +39,9 @@ a:hover {
 }
 
 iframe {
-    min-height: 100%;
+    min-height: 100vh;
     min-width: 100%;
+    bottom: 0;
 }
 
 .stream-button {
@@ -48,13 +54,13 @@ iframe {
 .container-fluid {
     padding: 0px;
     margin: 0px;
-    max-height: 100vh;
 }
 
 .row.no-padding {
   margin-right:0;
   margin-left:0;
 }
+
 .row.no-padding > [class*='col-'] {
   padding-right:0;
   padding-left:0;

@@ -5,4 +5,21 @@ $(document).ready(function() {
         $('#chat').toggleClass('hidden col-md-3');
         $('#stream').toggleClass('col-md-9 col-md-12');
     });
+
+    if (! canPlayHLS()) {
+        $('#stream iframe').attr('src', function(index, attribute) {
+            return attribute.replace('hls', 'embed');
+        });
+    }
 });
+
+
+var canPlayHLS = function() {
+    var result = document.createElement('video').canPlayType('application/vnd.apple.mpegURL')
+
+    if (result === "maybe") {
+        return true;
+    }
+
+    return false;
+}

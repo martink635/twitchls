@@ -7,6 +7,8 @@ $(document).ready(function() {
     });
 
     if (! canPlayHLS()) {
+        $('#no-hls-alert').toggleClass('hidden');
+
         $('#stream iframe').attr('src', function(index, attribute) {
             return attribute.replace('hls', 'embed');
         });

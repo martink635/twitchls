@@ -43,6 +43,8 @@ About - twitchls
                 </ul>
                 </p>
 
+                <p>If you are not using one of the browsers listed above, a notification will be shown on top of the site and the streams will load using Flash!</p>
+
                 <p>Twitchls is open source, licensed under <a href="http://opensource.org/licenses/mit-license.html">MIT License</a>, available on <a href="https://github.com/mkoterle/twitchls">Github</a>.</p>
 
             </div>

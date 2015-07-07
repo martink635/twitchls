@@ -1,23 +1,10 @@
-var gulp = require('gulp');
-var less = require('gulp-less');
-var minifyCSS = require('gulp-minify-css');
-var mainBowerFiles = require('main-bower-files');
+var elixir = require('laravel-elixir');
 
-gulp.task('bower', function() {
-  return gulp.src(mainBowerFiles(), {
-      base: 'bower_components'
-    })
-    .pipe(gulp.dest('resources/lib'));
-});
-
-gulp.task('bootstrap', function() {
-  return gulp.src('resources/lib/bootstrap/less/bootstrap.less')
-    .pipe(less())
-    .pipe(minifyCSS())
-    .pipe(gulp.dest('public/css'));
-});
-
-gulp.task('watch', function() {
-  gulp.watch(['resources/lib/bootstrap/less/*'], 
-      ['bootstrap']);
+elixir(function(mix) {
+    mix.sass('app.scss')
+       .scripts([
+           '../../../node_modules/jquery/dist/jquery.js',
+           '../../../node_modules/bootstrap/dist/js/bootstrap.js',
+           'app.js'
+       ], './public/js/app.js');
 });

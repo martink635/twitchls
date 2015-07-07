@@ -6025,6 +6025,16 @@ button.close {
 .streams a:hover .stream-title {
   color: #3f51b5; }
 
+.streams .btn-default, .streams .btn-default:focus {
+  color: #3f51b5;
+  background-color: #ffffff;
+  font-size: 14px;
+  border-color: #ffffff;
+  outline: none; }
+
+.streams .btn-default:hover, .streams .btn-default:focus {
+  border-color: #3f51b5; }
+
 .stream-title {
   font-size: 1.2em;
   height: 1.2em;

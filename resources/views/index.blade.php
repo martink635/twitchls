@@ -18,7 +18,7 @@ Stream list - twitchls
               <a class="navbar-brand" href="/"><span class="logo">twitc<span class="blue">hls</span></span></a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
-              
+
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="/about">About</a></li>
               </ul>
@@ -28,17 +28,29 @@ Stream list - twitchls
 
     <div class="container">
 
-        <div class="row streams">
-            @foreach ($streams as $stream)
-                <a class="col-xs-12 col-sm-6 col-md-4 col-lg-3" href="/{{ $stream->channel->name }}" data-uk-filter="{{ $stream->game }}">
-                    <img src="{{ $stream->preview->large }}" class="img-responsive" alt="">
-                    <div class="caption">
-                        <div class="stream-title">{{ $stream->channel->status or "Untitled Broadcast" }}</div>
-                        <div class="stream-description">{!! number_format($stream->viewers) !!} on {{ $stream->channel->display_name or "" }}</div>
-                    </div>
-                </a>
-            @endforeach            
+        <div class="row streams hidden">
 
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <select v-show="streams.length !== 0" class="col-xs-12 form-control" v-model="game">
+                        <option value="" selected>All Games</option>
+                        <option v-repeat="games" value="@{{ name }}">@{{ name }} (@{{ viewers }})</option>
+                    </select>
+                </div>
+            </form>
+
+            <a v-repeat="streams" class="col-xs-12 col-sm-6 col-md-4 col-lg-3" href="/@{{ channel }}">
+                <img src="@{{ preview }}" class="img-responsive" alt="">
+                <div class="caption">
+                    <div class="stream-title">@{{ title }}</div>
+                    <div class="stream-description">@{{ viewers }} on @{{ streamer }}</div>
+                </div>
+            </a>
+
+            <div class="col-xs-12">
+                <button v-show="! loading" v-on="click: loadMoreStreams" class="btn btn-default center-block">Load more streams</button>
+                <img v-show="loading" class="center-block" src="/images/oval.svg">
+            </div>
         </div>
 
     </div>

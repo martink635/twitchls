@@ -56,6 +56,18 @@ $navbar-default-border: #e7e7e7;
     color: $brand-primary;
 }
 
+.streams .btn-default, .streams .btn-default:focus {
+    color: $brand-primary;
+    background-color: #ffffff;
+    font-size: 14px;
+    border-color: #ffffff;
+    outline: none;
+}
+
+.streams .btn-default:hover, .streams .btn-default:focus {
+    border-color: $brand-primary;
+}
+
 .stream-title {
     font-size: 1.2em;
     height: 1.2em;

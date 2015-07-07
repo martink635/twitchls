@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
 
@@ -21,29 +21,26 @@ class StreamsController extends Controller
      */
     public function index()
     {
-        if (! \Cache::has('streams')) {
-            \Cache::put('streams', $this->streams->all(), 1);
-        }
-
-        $streams = \Cache::get('streams');
-
-        return view('index', ['streams' => $streams]);
+        return view('index');
     }
 
     /**
      * Retrieves 1 stream and displays it with Twitch chat
+     * @TODO Transform data before submitting into cache.
      *
      * @param  string
      * @return Response
      */
     public function show($stream)
     {
-        $stream = $this->streams->get($stream);
+        if (! \Cache::has($stream)) {
+            \Cache::put($stream, $this->streams->get($stream), 1);
+        }
 
-        if ($stream === null) {
+        if (\Cache::get($stream) === null) {
             return redirect('/');
         }
 
-        return view('stream', ['stream' => $stream]);
+        return view('stream', ['stream' => \Cache::get($stream)]);
     }
 }

@@ -36,7 +36,7 @@ class Twitch
     public function get($endpoint, $options = [])
     {
         $options = array_merge([
-            'baser_uri' => static::URL,
+            'base_uri' => static::URL,
             'defaults' => [
                 'headers' => [
                     'Accept' => "application/vnd.twitchtv.{static::VERSION}+json"

@@ -21,16 +21,9 @@ class Twitch
      */
     protected $client;
 
-    public function __construct()
+    public function __construct(Client $client)
     {
-        $this->client = new Client([
-            'base_uri' => static::URL,
-            'defaults' => [
-                'headers' => [
-                    'Accept' => "application/vnd.twitchtv.{static::VERSION}+json"
-                ]
-            ]
-        ]);
+        $this->client = $client;
     }
 
     /**
@@ -42,6 +35,15 @@ class Twitch
      */
     public function get($endpoint, $options = [])
     {
+        $options = array_merge([
+            'baser_uri' => static::URL,
+            'defaults' => [
+                'headers' => [
+                    'Accept' => "application/vnd.twitchtv.{static::VERSION}+json"
+                ]
+            ]
+        ], $options);
+
         $response = $this->client->get($endpoint, $options);
 
         return $this->json($response);

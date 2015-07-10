@@ -6,8 +6,8 @@ class Transformer
 {
     /**
      * Transforms an iterable object with the given transformer.
-     * The transformer can be an anonymouse function or it has to implement
-     * the TransformerInterface.
+     * The transformer can be an anonymouse function or it has
+     * to implement the TransformerInterface.
      *
      * @param  $object
      * @param  $transformer

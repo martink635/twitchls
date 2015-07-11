@@ -35,14 +35,7 @@ class Twitch
      */
     public function get($endpoint, $options = [])
     {
-        $options = array_merge([
-            'base_uri' => static::URL,
-            'defaults' => [
-                'headers' => [
-                    'Accept' => "application/vnd.twitchtv.{static::VERSION}+json"
-                ]
-            ]
-        ], $options);
+        $options = $this->mergeDefaultOptions($options);
 
         $response = $this->client->get($endpoint, $options);
 
@@ -52,11 +45,30 @@ class Twitch
     /**
      * Returns an object from the Guzzle response
      *
-     * @param  GuzzleHttp\Psr7\Response
+     * @param  GuzzleHttp\Psr7\Response $response
      * @return object
      */
-    private function json($response)
+    private function json(\GuzzleHttp\Psr7\Response $response)
     {
         return json_decode($response->getBody()->getContents());
+    }
+
+    /**
+     * Merges the default set options with the
+     * given array of options.
+     *
+     * @param  array $options
+     * @return array
+     */
+    private function mergeDefaultOptions(array $options)
+    {
+        return array_merge([
+                    'base_uri' => static::URL,
+                    'defaults' => [
+                        'headers' => [
+                            'Accept' => "application/vnd.twitchtv.{static::VERSION}+json"
+                        ]
+                    ]
+                ], $options);
     }
 }

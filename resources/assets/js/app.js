@@ -2,7 +2,7 @@
 
 $(document).ready(function() {
     $('#hide-chat').click(function() {
-        $(this).html($(this).html() == '<span class="glyphicon glyphicon-indent-left"></span>' ? '<span class="glyphicon glyphicon-indent-right"></span>' : '<span class="glyphicon glyphicon-indent-left"></span>');
+        $(this).html($(this).html() === '<span class="glyphicon glyphicon-indent-left"></span>' ? '<span class="glyphicon glyphicon-indent-right"></span>' : '<span class="glyphicon glyphicon-indent-left"></span>');
         $(this).toggleClass('btn-on-stream');
         $('#chat').toggleClass('hidden col-md-3');
         $('#stream').toggleClass('col-md-9 col-md-12');
@@ -24,7 +24,7 @@ $(document).ready(function() {
  * @return {boolean}
  */
 var canPlayHLS = function() {
-    var result = document.createElement('video').canPlayType('application/vnd.apple.mpegURL')
+    var result = document.createElement('video').canPlayType('application/vnd.apple.mpegURL');
 
     if (result === "maybe") {
         return true;
@@ -87,8 +87,8 @@ var streams = new Vue({
             $.get('/api/v1/streams/50/'+this.offset+'/'+this.game,
                 (function(data) {
                     this.streams = this.streams.concat(data);
-                    this.loading = false
-                    this.page++
+                    this.loading = false;
+                    this.page++;
                 }).bind(this)
             );
         },

@@ -36,7 +36,7 @@ class ApiController extends Controller
         // If key doesn't exist, fetch and transform streams
         if (! \Cache::has($key)) {
             $list = $streams->all(urldecode($game), $limit, $offset);
-            $result = $this->transformer->transform($list, new StreamTransformer);
+            $result = $this->transformer->transform($list->streams, new StreamTransformer);
 
             \Cache::put($key, $result, 1);
         }

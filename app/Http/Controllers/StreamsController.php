@@ -25,22 +25,20 @@ class StreamsController extends Controller
     }
 
     /**
-     * Retrieves 1 stream and displays it with Twitch chat
-     * @TODO Transform data before submitting into cache.
+     * Retrieves 1 stream and displays it with Twitch chat.
+     * Not caching on purpose.
      *
      * @param  string
      * @return Response
      */
     public function show($stream)
     {
-        if (! \Cache::has($stream)) {
-            \Cache::put($stream, $this->streams->get($stream), 1);
-        }
+        $stream = $this->streams->get($stream);
 
-        if (\Cache::get($stream) === null) {
+        if (! isset($stream->stream)) {
             return redirect('/');
         }
 
-        return view('stream', ['stream' => \Cache::get($stream)]);
+        return view('stream', ['stream' => $stream->stream]);
     }
 }

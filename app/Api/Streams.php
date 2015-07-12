@@ -20,7 +20,7 @@ class Streams
      */
     public function get($name)
     {
-        return $this->twitch->get("{$this->endpoint}/${name}")->stream;
+        return $this->twitch->get("{$this->endpoint}/${name}");
     }
 
     /**
@@ -45,6 +45,6 @@ class Streams
             ]
         ];
 
-        return $this->twitch->get("{$this->endpoint}", $options)->streams;
+        return $this->twitch->get("{$this->endpoint}", $options);
     }
 }

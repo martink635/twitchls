@@ -3,6 +3,7 @@
 namespace App\Api;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 
 class Twitch
 {
@@ -37,7 +38,11 @@ class Twitch
     {
         $options = $this->mergeDefaultOptions($options);
 
-        $response = $this->client->get($endpoint, $options);
+        try {
+            $response = $this->client->get($endpoint, $options);
+        } catch (ClientException $exception) {
+            return $this->json($exception->getResponse());
+        }
 
         return $this->json($response);
     }

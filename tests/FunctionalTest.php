@@ -8,6 +8,12 @@ class FunctionalTest extends TestCase
              ->see('twitc');
     }
 
+    public function testInvalidStreamRedirect()
+    {
+        $this->visit('/invalidstreamname')
+             ->seePageIs('/');
+    }
+
     public function testApiStreams()
     {
         $this->visit('/api/v1/streams/50/0')

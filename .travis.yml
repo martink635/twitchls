@@ -1,7 +1,6 @@
 language: php
 
 php:
-  - 5.5.9
   - 5.5
   - 5.6
   - 7.0
@@ -9,6 +8,6 @@ php:
 
 sudo: false
 
-install: composer install --no-interaction
+install: travis_retry composer install --no-interaction --prefer-source
 
 script: vendor/bin/phpunit

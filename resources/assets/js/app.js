@@ -2,10 +2,15 @@
 
 $(document).ready(function() {
     $('#hide-chat').click(function() {
-        $(this).html($(this).html() === '<span class="glyphicon glyphicon-indent-left"></span>' ? '<span class="glyphicon glyphicon-indent-right"></span>' : '<span class="glyphicon glyphicon-indent-left"></span>');
-        $(this).toggleClass('btn-on-stream');
+        $('span:first', this).toggleClass('glyphicon-indent-right glyphicon-indent-left');
+        $(this).parent().toggleClass('btn-group-on-stream');
         $('#chat').toggleClass('hidden col-md-3');
         $('#stream').toggleClass('col-md-9 col-md-12');
+    });
+
+    $('#fullscreen').click(function() {
+        toggleFullScreen();
+        $('span:first', this).toggleClass('glyphicon-resize-full glyphicon-resize-small');
     });
 
     if (! canPlayHLS()) {
@@ -31,6 +36,38 @@ var canPlayHLS = function() {
     }
 
     return false;
+}
+
+/**
+ * Toggle browser fullscren.
+ *
+ * @return {void}
+ */
+var toggleFullScreen = function () {
+    if (!document.fullscreenElement &&
+        !document.mozFullScreenElement &&
+        !document.webkitFullscreenElement &&
+        !document.msFullscreenElement ) {
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      } else if (document.documentElement.msRequestFullscreen) {
+        document.documentElement.msRequestFullscreen();
+      } else if (document.documentElement.mozRequestFullScreen) {
+        document.documentElement.mozRequestFullScreen();
+      } else if (document.documentElement.webkitRequestFullscreen) {
+        document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      }
+    }
 }
 
 var streams = new Vue({
@@ -75,7 +112,7 @@ var streams = new Vue({
          * Fetches the stream using the internal API.
          *
          * @param  {boolean} clean Whether we clean the stream list or not.
-         * @return void
+         * @return {void}
          */
         fetchStreams: function(clean) {
             this.loading = true;
@@ -96,7 +133,7 @@ var streams = new Vue({
         /**
          * Reset the stream list
          *
-         * @return void
+         * @return {void}
          */
         resetStreams: function() {
             this.streams = [];
@@ -106,7 +143,7 @@ var streams = new Vue({
         /**
          * Called when the button "load more streams" is pressed
          *
-         * @return void
+         * @return {void}
          */
         loadMoreStreams: function() {
             this.fetchStreams();
@@ -115,7 +152,7 @@ var streams = new Vue({
         /**
          * Fetch a list of top 30 games by viewers
          *
-         * @return void
+         * @return {void}
          */
         fetchGames: function() {
             $.get('/api/v1/games/30', (function(data) {

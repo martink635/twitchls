@@ -15,7 +15,12 @@
 
     <body style="overflow-y:hidden">
 
-        <button class="btn btn-default stream-button" type="button" id="hide-chat" title="Show/Hide Twitch chat"><span class="glyphicon glyphicon-indent-left"></span></button>
+        <div class="btn-group stream-buttons" role="group">
+            <button class="btn btn-default" type="button" id="hide-chat" title="Show/Hide Twitch chat"><span class="glyphicon glyphicon-indent-left"></span></button>
+
+            <button class="btn btn-default" type="button" id="fullscreen" title="Toggle FullScreen"><span class="glyphicon glyphicon-resize-full"></span></button>
+        </div>
+
 
         <div class="container-fluid">
             <div class="row no-padding">

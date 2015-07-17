@@ -125,6 +125,15 @@ iframe {
   padding-left:0;
 }
 
+.stream-buttons {
+    z-index: 100;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    border: none;
+    outline: none;
+}
+
 .stream-button, .btn-on-stream {
     z-index: 100;
     position: absolute;
@@ -134,18 +143,22 @@ iframe {
     outline: none;
 }
 
-.stream-button {
+.stream-buttons button, .stream-buttons button:focus {
+    border: none;
     background-color: $twitch-chat-background;
     color: $twitch-color;
+    outline: none
 }
 
-.stream-button:hover, .stream-button:focus {
+.stream-buttons button:hover {
     color: #000000;
     background-color: $twitch-chat-background;
     outline: none
 }
 
-.btn-on-stream, .btn-on-stream:active, .btn-on-stream:focus {
+.btn-group-on-stream button,
+.btn-group-on-stream button:active,
+.btn-group-on-stream button:focus {
     color: transparent;
     background-color: transparent;
     outline: none;
@@ -153,8 +166,12 @@ iframe {
     width: 60px;
 }
 
-.btn-on-stream:hover {
-    color: $twitch-color;
+.btn-group-on-stream:hover button{
     background-color: #f2f2f2;
     border-color: #666666;
+    color: $twitch-color;
+}
+
+.btn-group-on-stream button:hover {
+    color: #000000;
 }

@@ -1,5 +1,11 @@
 "use strict";
 
+var $ = require('jquery');
+var Vue = require('vue');
+var browser = require('./browser');
+
+var api = '/api/v1/';
+
 $(document).ready(function() {
     $('#hide-chat').click(function() {
         $('span:first', this).toggleClass('glyphicon-indent-right glyphicon-indent-left');
@@ -9,11 +15,11 @@ $(document).ready(function() {
     });
 
     $('#fullscreen').click(function() {
-        toggleFullScreen();
+        browser.toggleFullScreen();
         $('span:first', this).toggleClass('glyphicon-resize-full glyphicon-resize-small');
     });
 
-    if (! canPlayHLS()) {
+    if (! browser.canPlayHLS()) {
         $('#no-hls-alert').toggleClass('hidden');
 
         $('#stream iframe').attr('src', function(index, attribute) {
@@ -21,54 +27,6 @@ $(document).ready(function() {
         });
     }
 });
-
-/**
- * Using this function we can determine whether the browser
- * can display HLS content.
- *
- * @return {boolean}
- */
-var canPlayHLS = function() {
-    var result = document.createElement('video').canPlayType('application/vnd.apple.mpegURL');
-
-    if (result === "maybe") {
-        return true;
-    }
-
-    return false;
-}
-
-/**
- * Toggle browser fullscren.
- *
- * @return {void}
- */
-var toggleFullScreen = function () {
-    if (!document.fullscreenElement &&
-        !document.mozFullScreenElement &&
-        !document.webkitFullscreenElement &&
-        !document.msFullscreenElement ) {
-      if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen();
-      } else if (document.documentElement.msRequestFullscreen) {
-        document.documentElement.msRequestFullscreen();
-      } else if (document.documentElement.mozRequestFullScreen) {
-        document.documentElement.mozRequestFullScreen();
-      } else if (document.documentElement.webkitRequestFullscreen) {
-        document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-      }
-    } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      } else if (document.msExitFullscreen) {
-        document.msExitFullscreen();
-      } else if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen();
-      } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-      }
-    }
-}
 
 var streams = new Vue({
     el: '.streams',
@@ -121,7 +79,7 @@ var streams = new Vue({
                 this.resetStreams();
             }
 
-            $.get('/api/v1/streams/50/'+this.offset+'/'+this.game,
+            $.get(api+'streams/50/'+this.offset+'/'+this.game,
                 (function(data) {
                     this.streams = this.streams.concat(data);
                     this.loading = false;
@@ -155,7 +113,7 @@ var streams = new Vue({
          * @return {void}
          */
         fetchGames: function() {
-            $.get('/api/v1/games/30', (function(data) {
+            $.get(api+'games/30', (function(data) {
                 this.games = data;
             }).bind(this));
         }

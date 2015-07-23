@@ -38,6 +38,7 @@ About - twitchls
                 <p>HLS works only on a handful of browsers:
                 <ul>
                     <li>Safari 6+ (5+ for iOS),</li>
+                    <li>Edge (on Windows 10),</li>
                     <li>Chrome for Android 30+,</li>
                     <li>Stock Android browser 4.1+.</li>
                 </ul>

@@ -5,9 +5,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <meta name="description" content="Watch Twitch.tv streams using HTML5 instead of Flash with chat.">
+        <meta name="description" content="Watch your favorite Twitch streams using HTML5/HLS technology instead of Flash with chat.">
 
-        <title>@yield('title')</title>
+        <title>@yield('title') - twitchls</title>
 
         <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">

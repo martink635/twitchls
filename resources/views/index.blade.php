@@ -1,8 +1,6 @@
 @extends('layout')
 
-@section('title')
-Stream list - twitchls
-@endsection
+@section('title', 'Twitch Stream List')
 
 @section('content')
 

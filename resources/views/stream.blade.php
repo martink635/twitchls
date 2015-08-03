@@ -5,6 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <meta name="description" content="{{ $stream->channel->status }} on {{ $stream->channel->name }} playing {{ $stream->game }}.">
+
         <title>{{ $stream->channel->status }} on {{ $stream->channel->name }} - twitchls</title>
 
         <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
@@ -21,7 +23,6 @@
             <button class="btn btn-default" type="button" id="fullscreen" title="Toggle FullScreen"><span class="glyphicon glyphicon-resize-full"></span></button>
         </div>
 
-
         <div class="container-fluid">
             <div class="row no-padding">
                 <div class="stream col-md-9" id="stream">
@@ -29,8 +30,6 @@
                 </div>
 
                 <div class="chat col-md-3" id="chat">
-                    <!-- <iframe frameborder="0" scrolling="no" id="twitch_embed_chat" class="side" src="http://twitch.tv/chat/embed?channel={{ $stream->channel->name }}&amp;popout_chat=true"></iframe> -->
-
                     <iframe frameborder="0" scrolling="no" id="twitch_embed_chat" class="side" src="http://www.twitch.tv/{{ $stream->channel->name }}/chat?popout" frameborder="0" scrolling="no"></iframe>
                 </div>
             </div>

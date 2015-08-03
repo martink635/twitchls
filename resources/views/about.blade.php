@@ -1,8 +1,6 @@
 @extends('layout')
 
-@section('title')
-About - twitchls
-@endsection
+@section('title', 'About')
 
 @section('content')
 
@@ -33,7 +31,7 @@ About - twitchls
 
                 <h1>About</h1>
 
-                <p>This is an open source project, enabling you to watch streams using the <a href="http://en.wikipedia.org/wiki/HTTP_Live_Streaming">HLS</a> techonolgy instead of Flash. It uses significantly less power on a Mac. It also has the option to display the Twitch chat, which thanks to the new Twitch.tv update also loads without using Flash.</p>
+                <p>This is an open source project, enabling you to watch streams using the <a href="http://en.wikipedia.org/wiki/HTTP_Live_Streaming">HLS</a> techonolgy instead of Flash. It uses significantly less power on a Mac. It also has the option to display the Twitch chat, which thanks to the new Twitch update also loads without using Flash.</p>
 
                 <p>HLS works only on a handful of browsers:
                 <ul>

@@ -1,25 +1,20 @@
 'use strict';
 
-var $ = require('jquery');
 var Vue = require('vue');
-var browser = require('./browser');
-var tabs = require('./tabs');
+var browser = require('./modules/browser');
+var tabs = require('./modules/tabs');
+var r = require('./modules/request');
+var bootstrap = require('./bootstrap/no-jquery');
 
 var api = '/api/v1/';
 
-$(document).ready(function() {
+browser.ready(function() {
 
-    $('#hide-chat').click(function() {
-        $('span:first', this).toggleClass('glyphicon-indent-right glyphicon-indent-left');
-        $(this).parent().toggleClass('btn-group-on-stream');
-        $('#chat').toggleClass('hidden col-md-3');
-        $('#stream').toggleClass('col-md-9 col-md-12');
-    });
+    var collapsibleList = document.querySelectorAll('[data-toggle=collapse]');
 
-    $('#fullscreen').click(function() {
-        browser.toggleFullScreen();
-        $('span:first', this).toggleClass('glyphicon-resize-full glyphicon-resize-small');
-    });
+    for (var i = 0, leni = collapsibleList.length; i < leni; i++) {
+        collapsibleList[i].onclick = bootstrap.doCollapse;
+    }
 
     if (! browser.canPlayHLS()) {
         var hlsAlert = document.getElementById('no-hls-alert');
@@ -27,15 +22,15 @@ $(document).ready(function() {
         if (hlsAlert !== null && hlsAlert.classList.contains('hidden')) {
             hlsAlert.classList.remove('hidden');
         }
-
-        $('#stream iframe').attr('src', function(index, attribute) {
-            return attribute.replace('hls', 'embed');
-        });
     }
 
-    $('#searchForm').on('submit', function(e) {
-        return false;
-    });
+    var searchForm = document.getElementById('searchForm');
+
+    if (searchForm) {
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+        }, false);
+    }
 
     var tab = document.querySelectorAll('.nav-tabs li');
 
@@ -87,8 +82,11 @@ var streams = new Vue({
         this.fetchStreams(true);
         this.fetchGames();
 
-        if ($('.followed').length) {
-            this.identifier = $('meta[name=identifier]').attr("content");
+        var followedDiv = document.querySelector('.followed');
+
+        if (followedDiv) {
+            var identifier = document.querySelector('meta[name=identifier]');
+            this.identifier = identifier.getAttribute('content');
             this.fetchFollowed();
         }
 
@@ -125,7 +123,7 @@ var streams = new Vue({
                 this.resetStreams();
             }
 
-            $.get(api+'streams/50/'+this.offset+'/'+this.game,
+            r.get(api+'streams/50/'+this.offset+'/'+this.game,
                 (function(data) {
                     this.streams = this.streams.concat(data);
                     this.loading = false;
@@ -142,7 +140,7 @@ var streams = new Vue({
         fetchFollowed: function() {
             this.followedLoading = true;
 
-            $.get(api+'followed/50/'+this.offset+'/'+this.identifier,
+            r.get(api+'followed/50/'+this.offset+'/'+this.identifier,
                 (function(data) {
                     this.followed = data;
                     this.followedLoading = false;
@@ -175,7 +173,7 @@ var streams = new Vue({
          * @return {void}
          */
         fetchGames: function() {
-            $.get(api+'games/30', this.populateGames);
+            r.get(api+'games/30', this.populateGames);
         },
 
         /**
@@ -204,7 +202,7 @@ var streams = new Vue({
         fetchSearchResults: function() {
             this.resetSearchResults();
 
-            $.get(api+'search/'+this.searchQuery,
+            r.get(api+'search/'+this.searchQuery,
                 (function(data) {
                     this.searchResults = data;
                     this.searchLoading = false;

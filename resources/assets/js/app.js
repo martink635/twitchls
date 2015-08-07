@@ -22,7 +22,11 @@ $(document).ready(function() {
     });
 
     if (! browser.canPlayHLS()) {
-        document.querySelector('#no-hls-alert').classList.remove('hidden')
+        var hlsAlert = document.getElementById('no-hls-alert');
+
+        if (hlsAlert !== null && hlsAlert.classList.contains('hidden')) {
+            hlsAlert.classList.remove('hidden');
+        }
 
         $('#stream iframe').attr('src', function(index, attribute) {
             return attribute.replace('hls', 'embed');

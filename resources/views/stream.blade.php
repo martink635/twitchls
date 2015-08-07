@@ -7,7 +7,7 @@
 
         <meta name="description" content="{{ $stream->channel->status }} on {{ $stream->channel->name }} playing {{ $stream->game }}.">
 
-        <title>{{ $stream->channel->status }} on {{ $stream->channel->name }} - twitchls</title>
+        <title>{{ $stream->channel->status or 'Untitled Broadcast' }} on {{ $stream->channel->name }} - twitchls</title>
 
         <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">

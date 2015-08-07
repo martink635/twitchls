@@ -3,53 +3,85 @@
 @section('title', 'Twitch Stream List')
 
 @section('content')
-
-    <nav class="navbar navbar-default navbar-static-top">
-          <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="/"><span class="logo">twitc<span class="blue">hls</span></span></a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-
-              <ul class="nav navbar-nav navbar-right">
-                <li><a href="/about">About</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
-          </div>
-        </nav>
-
     <div class="container">
 
-        <div class="row streams hidden">
 
-            <form class="form-horizontal">
-                <div class="form-group">
-                    <select v-show="streams.length !== 0" class="col-xs-12 form-control" v-model="game">
-                        <option value="" selected>All Games</option>
-                        <option v-repeat="games" value="@{{ name }}">@{{ name }} (@{{ viewers }})</option>
-                    </select>
-                </div>
-            </form>
+        <div class="row tabs">
+            <ul class="nav nav-tabs">
 
-            <a v-repeat="streams" class="col-xs-12 col-sm-6 col-md-4 col-lg-3" href="/@{{ channel }}">
-                <img src="@{{ preview }}" class="img-responsive" alt="">
-                <div class="caption">
-                    <div class="stream-title">@{{ title }}</div>
-                    <div class="stream-description">@{{ viewers }} on @{{ streamer }}</div>
-                </div>
-            </a>
+                @if (isset($user))
+                <li class="active" data-key="followed"><a href="#followed">Followed</a></li>
+                <li data-key="all"><a href="#all">All</a></li>
+                @else
+                <li class="active" data-key="all"><a href="#all">All</a></li>
+                @endif
 
-            <div class="col-xs-12">
-                <button v-show="! loading" v-on="click: loadMoreStreams" class="btn btn-default center-block">Load more streams</button>
-                <img v-show="loading" class="center-block" src="/images/oval.svg">
-            </div>
+                <li data-key="search"><a href="#search">Search</a></li>
+            </ul>
         </div>
 
+        <div id="vue" class="hidden">
+
+            @if (isset($user))
+            <div class="row streams followed">
+                <a v-repeat="followed" class="col-xs-12 col-sm-6 col-md-4 col-lg-3" href="/@{{ channel }}">
+                    <img src="@{{ preview }}" class="img-responsive" alt="">
+                    <div class="caption">
+                        <div class="stream-title">@{{ title }}</div>
+                        <div class="stream-description">@{{ viewers }} on @{{ streamer }}</div>
+                    </div>
+                </a>
+
+                <div class="col-xs-12 loading">
+                    <img v-show="followedLoading" class="center-block" src="/images/oval.svg">
+                </div>
+            </div>
+            @endif
+
+            <div class="row streams all">
+
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <select class="col-xs-12 form-control" v-model="game" options="games"></select>
+                    </div>
+                </form>
+
+                <a v-repeat="streams" class="col-xs-12 col-sm-6 col-md-4 col-lg-3" href="/@{{ channel }}">
+                    <img src="@{{ preview }}" class="img-responsive" alt="">
+                    <div class="caption">
+                        <div class="stream-title">@{{ title }}</div>
+                        <div class="stream-description">@{{ viewers }} on @{{ streamer }}</div>
+                    </div>
+                </a>
+
+                <div class="col-xs-12 loading">
+                    <button v-show="! loading" v-on="click: loadMoreStreams" class="btn btn-default center-block">Load more streams</button>
+                    <img v-show="loading" class="center-block" src="/images/oval.svg">
+                </div>
+            </div>
+
+            <div class="row streams search hidden">
+
+                <form class="form-horizontal" id="searchForm">
+                    <div class="form-group">
+                        <input type="text" v-on="keyup: resetSearchResults" v-model="searchQuery" name="searchQuery" class="form-control col-xs-12" placeholder="Search..." debounce="600">
+                    </div>
+                </form>
+
+                <a v-repeat="searchResults" class="col-xs-12 col-sm-6 col-md-4 col-lg-3" href="/@{{ channel }}">
+                    <img src="@{{ preview }}" class="img-responsive" alt="">
+                    <div class="caption">
+                        <div class="stream-title">@{{ title }}</div>
+                        <div class="stream-description">@{{ viewers }} on @{{ streamer }}</div>
+                    </div>
+                </a>
+
+                <div class="col-xs-12 loading">
+                    <p v-show="(! searchLoading) && (searchResults.length == 0) && (searchQuery.length === 0)">Nothing to do.</p>
+                    <p v-show="(! searchLoading) && (searchResults.length == 0) && (searchQuery.length !== 0)">No results for "@{{ searchQuery }}".</p>
+                    <img v-show="searchLoading && (searchQuery.length !== 0)" class="center-block" src="/images/oval.svg">
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

@@ -1,0 +1,71 @@
+iframe {
+    min-height: 100vh;
+    min-width: 100%;
+    bottom: 0;
+}
+
+.container-fluid {
+    padding: 0px;
+    margin: 0px;
+}
+
+.row.no-padding {
+  margin-right:0;
+  margin-left:0;
+}
+
+.row.no-padding > [class*='col-'] {
+  padding-right:0;
+  padding-left:0;
+}
+
+.stream-buttons {
+    z-index: 100;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    border: none;
+    outline: none;
+}
+
+.stream-button, .btn-on-stream {
+    z-index: 100;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    border: none;
+    outline: none;
+}
+
+.stream-buttons button, .stream-buttons button:focus {
+    border: none;
+    background-color: $twitch-chat-background;
+    color: $twitch-color;
+    outline: none
+}
+
+.stream-buttons button:hover {
+    color: #000000;
+    background-color: $twitch-chat-background;
+    outline: none
+}
+
+.btn-group-on-stream button,
+.btn-group-on-stream button:active,
+.btn-group-on-stream button:focus {
+    color: transparent;
+    background-color: transparent;
+    outline: none;
+    height: 60px;
+    width: 60px;
+}
+
+.btn-group-on-stream:hover button{
+    background-color: #f2f2f2;
+    border-color: #666666;
+    color: $twitch-color;
+}
+
+.btn-group-on-stream button:hover {
+    color: #000000;
+}

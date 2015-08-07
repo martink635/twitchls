@@ -1,19 +1,21 @@
-<?php namespace App\Exceptions;
+<?php
+
+namespace App\Exceptions;
 
 use Exception;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 
-class Handler extends ExceptionHandler {
-
+class Handler extends ExceptionHandler
+{
     /**
      * A list of the exception types that should not be reported.
      *
      * @var array
      */
     protected $dontReport = [
-        'Symfony\Component\HttpKernel\Exception\HttpException'
+        HttpException::class,
     ];
-
     /**
      * Report or log an exception.
      *
@@ -36,7 +38,10 @@ class Handler extends ExceptionHandler {
      */
     public function render($request, Exception $e)
     {
-        return parent::render($request, $e);
+        if (env('APP_DEBUG') == true) {
+            return parent::render($request, $e);
+        } else {
+            return view('errors.custom');
+        }
     }
-
 }

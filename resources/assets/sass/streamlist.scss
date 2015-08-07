@@ -1,0 +1,42 @@
+.streams a:hover {
+    text-decoration: none;
+}
+
+.streams a:hover .stream-title {
+    color: $brand-primary;
+}
+
+.streams .btn-default, .streams .btn-default:focus {
+    color: $brand-primary;
+    background-color: #ffffff;
+    font-size: 14px;
+    border-color: #ffffff;
+    outline: none;
+}
+
+.streams .btn-default:hover, .streams .btn-default:focus {
+    border-color: $brand-primary;
+}
+
+.stream-title {
+    font-size: 1.2em;
+    height: 1.2em;
+    margin-top: 8px;
+    margin-bottom: 5px;
+    color: #32323e;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+
+.stream-description {
+    color: #8c8c8c;
+    margin-bottom: 10px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.loading {
+    margin-top: 20px;
+}

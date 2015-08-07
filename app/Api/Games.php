@@ -6,6 +6,18 @@ use App\Api\Twitch;
 
 class Games
 {
+    /**
+     * Api endpoint
+     * @var string
+     */
+    protected $endpoint;
+
+    /**
+     * Twitch Object
+     * @var Twitch
+     */
+    protected $twitch;
+
     public function __construct(Twitch $twitch)
     {
         $this->endpoint = "games";
@@ -29,7 +41,7 @@ class Games
             ]
         ];
 
-        return $this->twitch->get("{$this->endpoint}/top", $options)->top;
+        return $this->twitch->options($options)->get("{$this->endpoint}/top")->top;
     }
 
 }

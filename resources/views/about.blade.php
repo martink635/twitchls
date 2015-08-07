@@ -3,31 +3,19 @@
 @section('title', 'About')
 
 @section('content')
-
-    <nav class="navbar navbar-default navbar-static-top">
-          <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="/"><span class="logo">twitc<span class="blue">hls</span></span></a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-
-              <ul class="nav navbar-nav navbar-right">
-                <li><a href="/about">About</a></li>
-              </ul>
-            </div><!--/.nav-collapse -->
-          </div>
-        </nav>
-
     <div class="container">
 
-        <div class="row">
+        <div class="row page">
             <div class="col-md-6 col-md-offset-3">
+
+                @if (isset($user))
+                <div class="alert alert-warning">
+                    <h4>You are logged in via Twitch.</h4>
+                    <p>We do not store your Twitch information.</p>
+                    <p></p>
+                    <p>If you would like to remove the Twitch connection for this website, click <i>Disconnect</i> for <i>twitchls</i> <a href="http://www.twitch.tv/settings/connections">here</a>.</p>
+                </div>
+                @endif
 
                 <h1>About</h1>
 

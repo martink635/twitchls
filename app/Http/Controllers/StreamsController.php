@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Api\Streams;
+use Illuminate\Http\Request;
 
 class StreamsController extends Controller
 {
+    /**
+     * Twitch API Streams object
+     * @var Streams
+     */
     protected $streams;
 
     public function __construct(Streams $streams)
@@ -19,8 +24,14 @@ class StreamsController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->user() !== null) {
+            $followed = $this->streams->followed($request->user()->token);
+
+            view()->share('streams', $followed->streams);
+        }
+
         return view('index');
     }
 

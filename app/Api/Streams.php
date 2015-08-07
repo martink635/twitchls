@@ -6,6 +6,18 @@ use App\Api\Twitch;
 
 class Streams
 {
+    /**
+     * Api endpoint
+     * @var string
+     */
+    protected $endpoint;
+
+    /**
+     * Twitch Object
+     * @var Twitch
+     */
+    protected $twitch;
+    
     public function __construct(Twitch $twitch)
     {
         $this->endpoint = "streams";
@@ -45,6 +57,19 @@ class Streams
             ]
         ];
 
-        return $this->twitch->get("{$this->endpoint}", $options);
+        return $this->twitch->options($options)->get($this->endpoint);
+    }
+
+    public function followed($token, $limit = 50, $offset = 0)
+    {
+        $options = [
+            'query' => [
+                'limit' => $limit,
+                'offset' => $offset,
+                'hls' => 'true'
+            ]
+        ];
+
+        return $this->twitch->auth($token)->options($options)->get("{$this->endpoint}/followed");
     }
 }

@@ -5,6 +5,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        @if (isset($user))
+        <meta name="identifier" content="{{ $user->identifier }}">
+        @endif
+
         <meta name="description" content="Watch your favorite Twitch streams using HTML5/HLS technology instead of Flash with chat.">
 
         <title>@yield('title') - twitchls</title>
@@ -18,6 +22,8 @@
     <body>
 
         <div id="no-hls-alert" class="alert alert-warning text-center hidden">You are not using an <b>HLS</b> compatible browser. Streams will load using Flash instead of HTML5. Please check out <a href="/about">/about</a> for more information.</div>
+
+        @include('navigation')
 
         @yield('content')
 

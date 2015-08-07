@@ -2,7 +2,7 @@
 
 use Closure;
 
-class ExampleMiddleware {
+class UserMiddleware {
 
     /**
      * Handle an incoming request.
@@ -13,6 +13,16 @@ class ExampleMiddleware {
      */
     public function handle($request, Closure $next)
     {
+        if ($request->session()->has('user')) {
+            $user = $request->session()->get('user');
+
+            $request->setUserResolver(function() use ($user) {
+                return $user;
+            });
+
+            view()->share('user', $user);
+        }
+
         return $next($request);
     }
 

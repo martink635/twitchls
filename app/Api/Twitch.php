@@ -1,79 +1,139 @@
 <?php
 
-namespace App\Api;
+namespace app\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Psr7\Response;
 
 class Twitch
 {
     /**
      * Twitch API url
+     * @var string
      */
     const URL = "https://api.twitch.tv/kraken/";
 
     /**
      * Twitch API version
+     * @var string
      */
     const VERSION = "v3";
 
     /**
-     * GuzzleHttp\Client
+     * @var GuzzleHttp\Client
      */
     protected $client;
 
+    /**
+     * Options
+     * @var array
+     */
+    protected $options = [];
+
+    /**
+     * We setup the default Twitch API options
+     *
+     * @param  Client $client
+     * @return void
+     */
     public function __construct(Client $client)
     {
         $this->client = $client;
+
+        $this->resetOptions();
     }
 
     /**
-     *  Twitch GET request, with options
+     *  Twitch GET request
      *
      * @param  string
-     * @param  array
      * @return object
      */
-    public function get($endpoint, $options = [])
+    public function get($endpoint)
     {
-        $options = $this->mergeDefaultOptions($options);
-
         try {
-            $response = $this->client->get($endpoint, $options);
+            $response = $this->client->get($endpoint, $this->options);
         } catch (ClientException $exception) {
             return $this->json($exception->getResponse());
         }
 
+        $this->resetOptions();
         return $this->json($response);
+    }
+
+    /**
+     *  Twitch POST request
+     *
+     * @param  string
+     * @return object
+     */
+    public function post($endpoint)
+    {
+        try {
+            $response = $this->client->post($endpoint, $this->options);
+        } catch (ClientException $exception) {
+            return $this->json($exception->getResponse());
+        }
+
+        $this->resetOptions();
+        return $this->json($response);
+    }
+
+    /**
+     * Sets the neccessary options for Authorization
+     *
+     * @param  string $token
+     * @return Twitch
+     */
+    public function auth($token)
+    {
+        $auth_params = [
+            'headers' => [
+                'Authorization' => "OAuth {$token}"
+            ]
+        ];
+
+        return $this->options($auth_params);
+    }
+
+    /**
+     * Merges the current options with an array
+     *
+     * @param  array $options
+     * @return Twitch
+     */
+    public function options($options)
+    {
+        $this->options = array_replace_recursive($this->options, $options);
+
+        return $this;
+    }
+
+    /**
+     * Set options to the default values
+     *
+     * @return void
+     */
+    protected function resetOptions()
+    {
+        $this->options = [
+            'base_uri' => static::URL,
+            'headers' => [
+                'Client-ID' => env('TWITCH_CLIENT_ID', ''),
+                'Accept' => "application/vnd.twitchtv.{static::VERSION}+json"
+            ]
+        ];
     }
 
     /**
      * Returns an object from the Guzzle response
      *
-     * @param  GuzzleHttp\Psr7\Response $response
+     * @param  Response $response
      * @return object
      */
-    private function json(\GuzzleHttp\Psr7\Response $response)
+    protected function json(Response $response)
     {
         return json_decode($response->getBody()->getContents());
-    }
-
-    /**
-     * Merges the default set options with the
-     * given array of options.
-     *
-     * @param  array $options
-     * @return array
-     */
-    private function mergeDefaultOptions(array $options)
-    {
-        return array_merge([
-                    'base_uri' => static::URL,
-                    'defaults' => [
-                        'headers' => [
-                            'Accept' => "application/vnd.twitchtv.{static::VERSION}+json"
-                        ]
-                    ]
-                ], $options);
     }
 }

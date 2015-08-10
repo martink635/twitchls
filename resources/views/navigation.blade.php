@@ -13,7 +13,7 @@
 
       <ul class="nav navbar-nav navbar-right">
         @if (! isset($user))
-        <li><a href="/login">Login with Twitch</a></li>
+        <li><a class="btn" href="/login">Login with Twitch</a></li>
         @else
         <li><a href="/logout">Logout {{ $user->display_name }}</a></li>
         @endif

@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="/css/app.css">
     </head>
 
-    <body style="overflow-y:hidden">
+    <body style="overflow:hidden">
 
         <div class="btn-group stream-buttons" role="group">
             <button class="btn btn-default" type="button" id="hide-chat" title="Show/Hide Twitch chat"><span class="glyphicon glyphicon-indent-left"></span></button>

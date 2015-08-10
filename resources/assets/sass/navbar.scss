@@ -1,13 +1,30 @@
-.navbar-brand {
-    font-size: 32px;
-}
 
-.logo {
-    font-weight: 300;
-    color: #333;
-}
+.navbar {
+    .navbar-brand {
+        font-size: 32px;
+    }
 
-.logo .blue {
-    font-weight: 600;
-    color: $brand-primary;
+    .logo {
+        font-weight: 300;
+        color: #333;
+    }
+
+    .logo .blue {
+        font-weight: 600;
+        color: $brand-primary;
+    }
+
+    li a.btn {
+        border-radius: 3px;
+        border: 1px solid $brand-primary;
+        background-color: $brand-primary;
+        color: #ededed;
+        padding: 10px;
+        margin-top: 14px;
+    }
+
+    li a.btn:hover {
+        background-color: transparent;
+        color: $brand-primary;
+    }
 }

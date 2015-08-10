@@ -20,6 +20,16 @@ $navbar-default-border: #e7e7e7;
 @import "page";
 @import "footer";
 
+.logo {
+    font-weight: 300;
+    color: #333;
+}
+
+.logo .blue {
+    font-weight: 600;
+    color: $brand-primary;
+}
+
 .alert {
     margin-bottom: 0;
 }

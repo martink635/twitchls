@@ -24,11 +24,11 @@
 
             @if (isset($user))
             <div class="row streams followed">
-                <a v-repeat="followed" class="col-xs-12 col-sm-6 col-md-4 col-lg-3" href="/@{{ channel }}">
-                    <img src="@{{ preview }}" class="img-responsive" alt="">
+                <a v-for="stream in followed" class="col-xs-12 col-sm-6 col-md-4 col-lg-3" href="/@{{ stream.channel }}">
+                    <img v-bind:src="stream.preview" class="img-responsive" alt="">
                     <div class="caption">
-                        <div class="stream-title">@{{ title }}</div>
-                        <div class="stream-description">@{{ viewers }} on @{{ streamer }}</div>
+                        <div class="stream-title">@{{ stream.title }}</div>
+                        <div class="stream-description">@{{ stream.viewers }} on @{{ stream.streamer }}</div>
                     </div>
                 </a>
 
@@ -42,20 +42,24 @@
 
                 <form class="form-horizontal">
                     <div class="form-group">
-                        <select class="col-xs-12 form-control" v-model="game" options="games"></select>
+                        <select class="col-xs-12 form-control" v-model="game" options="games">
+                            <option v-for="game in games" v-bind:value="game.value">
+                                @{{ game.text }}
+                            </option>
+                        </select>
                     </div>
                 </form>
 
-                <a v-repeat="streams" class="col-xs-12 col-sm-6 col-md-4 col-lg-3" href="/@{{ channel }}">
-                    <img src="@{{ preview }}" class="img-responsive" alt="">
+                <a v-for="stream in streams" class="col-xs-12 col-sm-6 col-md-4 col-lg-3" href="/@{{ stream.channel }}">
+                    <img v-bind:src="stream.preview" class="img-responsive" alt="">
                     <div class="caption">
-                        <div class="stream-title">@{{ title }}</div>
-                        <div class="stream-description">@{{ viewers }} on @{{ streamer }}</div>
+                        <div class="stream-title">@{{ stream.title }}</div>
+                        <div class="stream-description">@{{ stream.viewers }} on @{{ stream.streamer }}</div>
                     </div>
                 </a>
 
                 <div class="col-xs-12 loading">
-                    <button v-show="! loading" v-on="click: loadMoreStreams" class="btn btn-default center-block">Load more streams</button>
+                    <button v-show="! loading" v-on:click="loadMoreStreams" class="btn btn-default center-block">Load more streams</button>
                     <img v-show="loading" class="center-block" src="/images/oval.svg">
                 </div>
             </div>
@@ -64,15 +68,15 @@
 
                 <form class="form-horizontal" id="searchForm">
                     <div class="form-group">
-                        <input type="text" v-on="keyup: resetSearchResults" v-model="searchQuery" name="searchQuery" class="form-control col-xs-12" placeholder="Search..." debounce="600">
+                        <input type="text" v-on:keyup="resetSearchResults" v-model="searchQuery" name="searchQuery" class="form-control col-xs-12" placeholder="Search..." debounce="600">
                     </div>
                 </form>
 
-                <a v-repeat="searchResults" class="col-xs-12 col-sm-6 col-md-4 col-lg-3" href="/@{{ channel }}">
-                    <img src="@{{ preview }}" class="img-responsive" alt="">
+                <a v-for="stream in searchResults" class="col-xs-12 col-sm-6 col-md-4 col-lg-3" href="/@{{ stream.channel }}">
+                    <img v-bind:src="stream.preview" class="img-responsive" alt="">
                     <div class="caption">
-                        <div class="stream-title">@{{ title }}</div>
-                        <div class="stream-description">@{{ viewers }} on @{{ streamer }}</div>
+                        <div class="stream-title">@{{ stream.title }}</div>
+                        <div class="stream-description">@{{ stream.viewers }} on @{{ stream.streamer }}</div>
                     </div>
                 </a>
 

@@ -75,6 +75,10 @@ var streams = new Vue({
         }
     },
 
+    components: {
+        'stream': require('./components/stream'),
+    },
+
     /**
      * Runs on startup
      */

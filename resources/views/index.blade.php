@@ -24,13 +24,8 @@
 
             @if (isset($user))
             <div class="row streams followed">
-                <a v-for="stream in followed" class="col-xs-12 col-sm-6 col-md-4 col-lg-3" href="/@{{ stream.channel }}">
-                    <img v-bind:src="stream.preview" class="img-responsive" alt="">
-                    <div class="caption">
-                        <div class="stream-title">@{{ stream.title }}</div>
-                        <div class="stream-description">@{{ stream.viewers }} on @{{ stream.streamer }}</div>
-                    </div>
-                </a>
+
+                <stream v-for="stream in followed" :stream="stream"></stream>
 
                 <div class="col-xs-12 loading">
                     <img v-show="followedLoading" class="center-block" src="/images/oval.svg">
@@ -50,13 +45,7 @@
                     </div>
                 </form>
 
-                <a v-for="stream in streams" class="col-xs-12 col-sm-6 col-md-4 col-lg-3" href="/@{{ stream.channel }}">
-                    <img v-bind:src="stream.preview" class="img-responsive" alt="">
-                    <div class="caption">
-                        <div class="stream-title">@{{ stream.title }}</div>
-                        <div class="stream-description">@{{ stream.viewers }} on @{{ stream.streamer }}</div>
-                    </div>
-                </a>
+                <stream v-for="stream in streams" :stream="stream"></stream>
 
                 <div class="col-xs-12 loading">
                     <button v-show="! loading" v-on:click="loadMoreStreams" class="btn btn-default center-block">Load more streams</button>
@@ -72,13 +61,7 @@
                     </div>
                 </form>
 
-                <a v-for="stream in searchResults" class="col-xs-12 col-sm-6 col-md-4 col-lg-3" href="/@{{ stream.channel }}">
-                    <img v-bind:src="stream.preview" class="img-responsive" alt="">
-                    <div class="caption">
-                        <div class="stream-title">@{{ stream.title }}</div>
-                        <div class="stream-description">@{{ stream.viewers }} on @{{ stream.streamer }}</div>
-                    </div>
-                </a>
+                <stream v-for="stream in searchResults" :stream="stream"></stream>
 
                 <div class="col-xs-12 loading">
                     <p v-show="(! searchLoading) && (searchResults.length == 0) && (searchQuery.length === 0)">Nothing to do.</p>

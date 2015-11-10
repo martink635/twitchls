@@ -18,7 +18,7 @@ gulp --production
 vendor/bin/phpunit
 ```
 
-In order to Login via Twitch and load the followed streams you need to [register](http://www.twitch.tv/settings/connections) your applicaiton on the Twitch website. After you've registered, fill the `TWITCH_CLIENT_ID`, `TWITCH_CLIENT_SECRET` and `TWITCH_REDIRECT_URL` in the `.env` file.
+In order to Login via Twitch and load the followed streams you need to [register](http://www.twitch.tv/settings/connections) your application on the Twitch website. After you've registered, fill the `TWITCH_CLIENT_ID`, `TWITCH_CLIENT_SECRET` and `TWITCH_REDIRECT_URL` in the `.env` file.
 
 ## License
 

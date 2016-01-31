@@ -72,6 +72,10 @@ var streams = new Vue({
     computed: {
         offset: function() {
             return this.page * 50;
+        },
+
+        gameURI: function() {
+            return encodeURIComponent(this.game);
         }
     },
 
@@ -127,7 +131,7 @@ var streams = new Vue({
                 this.resetStreams();
             }
 
-            r.get(api+'streams/50/'+this.offset+'/'+this.game,
+            r.get(api+'streams/50/'+this.offset+'/'+this.gameURI,
                 (function(data) {
                     this.streams = this.streams.concat(data);
                     this.loading = false;
@@ -177,7 +181,7 @@ var streams = new Vue({
          * @return {void}
          */
         fetchGames: function() {
-            r.get(api+'games/30', this.populateGames);
+            r.get(api+'games/100', this.populateGames);
         },
 
         /**

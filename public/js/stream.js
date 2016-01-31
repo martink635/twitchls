@@ -1,1 +1,110 @@
-!function e(t,n,l){function c(u,r){if(!n[u]){if(!t[u]){var s="function"==typeof require&&require;if(!r&&s)return s(u,!0);if(o)return o(u,!0);var m=new Error("Cannot find module '"+u+"'");throw m.code="MODULE_NOT_FOUND",m}var d=n[u]={exports:{}};t[u][0].call(d.exports,function(e){var n=t[u][1][e];return c(n?n:e)},d,d.exports,e,t,n,l)}return n[u].exports}for(var o="function"==typeof require&&require,u=0;u<l.length;u++)c(l[u]);return c}({1:[function(e,t,n){"use strict";t.exports={canPlayHLS:function(){var e=document.createElement("video").canPlayType("application/vnd.apple.mpegURL");return"maybe"===e?!0:!1},toggleFullScreen:function(){document.fullscreenElement||document.mozFullScreenElement||document.webkitFullscreenElement||document.msFullscreenElement?document.exitFullscreen?document.exitFullscreen():document.msExitFullscreen?document.msExitFullscreen():document.mozCancelFullScreen?document.mozCancelFullScreen():document.webkitExitFullscreen&&document.webkitExitFullscreen():document.documentElement.requestFullscreen?document.documentElement.requestFullscreen():document.documentElement.msRequestFullscreen?document.documentElement.msRequestFullscreen():document.documentElement.mozRequestFullScreen?document.documentElement.mozRequestFullScreen():document.documentElement.webkitRequestFullscreen&&document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT)},ready:function(e){return"function"==typeof e?"complete"===document.readyState?e():void document.addEventListener("DOMContentLoaded",e,!1):void 0}}},{}],2:[function(e,t,n){"use strict";var l=e("./modules/browser");l.ready(function(){var e=document.getElementById("hide-chat");e&&e.addEventListener("click",function(e){this.childNodes[0].classList.toggle("glyphicon-indent-right"),this.childNodes[0].classList.toggle("glyphicon-indent-left"),this.parentNode.classList.toggle("btn-group-on-stream"),document.getElementById("chat").classList.toggle("hidden"),document.getElementById("chat").classList.toggle("col-md-3"),document.getElementById("stream").classList.toggle("col-md-9"),document.getElementById("stream").classList.toggle("col-md-12")},!1);var t=document.getElementById("fullscreen");if(t&&t.addEventListener("click",function(e){l.toggleFullScreen(),this.childNodes[0].classList.toggle("glyphicon-resize-full"),this.childNodes[0].classList.toggle("glyphicon-resize-small")},!1),!l.canPlayHLS()){var n=document.querySelector("#stream iframe");if(n){var c=n.getAttribute("src");n.setAttribute("src",c.replace("hls","embed"))}}})},{"./modules/browser":1}]},{},[2]);
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+'use strict';
+
+module.exports = {
+
+  /**
+   * Using this function we can determine whether the browser
+   * can display HLS content.
+   *
+   * @return {boolean}
+   */
+  canPlayHLS: function canPlayHLS() {
+    var result = document.createElement('video').canPlayType('application/vnd.apple.mpegURL');
+
+    if (result === "maybe") {
+      return true;
+    }
+
+    return false;
+  },
+
+  /**
+   * Toggle browser fullscren.
+   *
+   * @return {void}
+   */
+  toggleFullScreen: function toggleFullScreen() {
+    if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      } else if (document.documentElement.msRequestFullscreen) {
+        document.documentElement.msRequestFullscreen();
+      } else if (document.documentElement.mozRequestFullScreen) {
+        document.documentElement.mozRequestFullScreen();
+      } else if (document.documentElement.webkitRequestFullscreen) {
+        document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      }
+    }
+  },
+
+  ready: function ready(fn) {
+
+    // Sanity check
+    if (typeof fn !== 'function') return;
+
+    // If document is already loaded, run method
+    if (document.readyState === 'complete') {
+      return fn();
+    }
+
+    // Otherwise, wait until document is loaded
+    document.addEventListener('DOMContentLoaded', fn, false);
+  }
+};
+
+},{}],2:[function(require,module,exports){
+'use strict';
+
+var browser = require('./modules/browser');
+
+browser.ready(function () {
+
+    var hideChat = document.getElementById('hide-chat');
+
+    if (hideChat) {
+        hideChat.addEventListener('click', function (e) {
+            this.childNodes[0].classList.toggle('glyphicon-indent-right');
+            this.childNodes[0].classList.toggle('glyphicon-indent-left');
+            this.parentNode.classList.toggle('btn-group-on-stream');
+
+            document.getElementById('chat').classList.toggle('hidden');
+            document.getElementById('chat').classList.toggle('col-md-3');
+
+            document.getElementById('stream').classList.toggle('col-md-9');
+            document.getElementById('stream').classList.toggle('col-md-12');
+        }, false);
+    }
+
+    var fullscreen = document.getElementById('fullscreen');
+
+    if (fullscreen) {
+        fullscreen.addEventListener('click', function (e) {
+            browser.toggleFullScreen();
+            this.childNodes[0].classList.toggle('glyphicon-resize-full');
+            this.childNodes[0].classList.toggle('glyphicon-resize-small');
+        }, false);
+    }
+
+    if (!browser.canPlayHLS()) {
+
+        var streamFrame = document.querySelector('#stream iframe');
+
+        if (streamFrame) {
+            var attr = streamFrame.getAttribute('src');
+            streamFrame.setAttribute('src', attr.replace('hls', 'embed'));
+        }
+    }
+});
+
+},{"./modules/browser":1}]},{},[2]);

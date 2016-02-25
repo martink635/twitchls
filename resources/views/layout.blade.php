@@ -21,7 +21,7 @@
 
     <body>
 
-        <div id="no-hls-alert" class="alert alert-warning text-center hidden">You are not using an <b>HLS</b> compatible browser. Streams will load using Flash instead of HTML5. Please check out <a href="/about">/about</a> for more information.</div>
+        <div id="no-hls-alert" class="alert alert-warning text-center hidden">You are <b>not</b> using an <b>HLS</b> compatible browser. Streams will load using an experimental Twitch feature. If you are having problems visit <a href="/about">/about</a> to disable it.</div>
 
         @include('navigation')
 

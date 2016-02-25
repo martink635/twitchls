@@ -62,6 +62,7 @@ $app->middleware([
     'Illuminate\View\Middleware\ShareErrorsFromSession',
     'Laravel\Lumen\Http\Middleware\VerifyCsrfToken',
 
+	'App\Http\Middleware\Html5Middleware',
     'App\Http\Middleware\UserMiddleware',
 ]);
 

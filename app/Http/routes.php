@@ -24,4 +24,9 @@ if (getenv('APP_DEBUG') == false) {
     });
 }
 
+$app->get('/html5', function() {
+    \Session::set('html5', ! \Session::get('html5'));
+    return redirect()->back();
+});
+
 $app->get('/{stream}', 'App\Http\Controllers\StreamsController@show');

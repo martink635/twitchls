@@ -38,7 +38,7 @@
                             scrolling="no"
                             class="side"
                             id="twitch_embed_chat"
-                            src="http://www.twitch.tv/{{ $stream->channel->name }}/chat"
+                            src="http://www.twitch.tv/{{ $stream->channel->name }}/chat">
                     </iframe>
                 </div>
             </div>

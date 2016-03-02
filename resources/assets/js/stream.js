@@ -1,6 +1,7 @@
 'use strict';
 
 var browser = require('./modules/browser');
+var hotkeys = require('hotkeys-js');
 
 browser.ready(function() {
 
@@ -30,13 +31,4 @@ browser.ready(function() {
         }, false);
     }
 
-    if (! browser.canPlayHLS()) {
-
-        var streamFrame = document.querySelector('#stream iframe');
-
-        if (streamFrame) {
-            var attr = streamFrame.getAttribute('src');
-            streamFrame.setAttribute('src', attr.replace('hls', 'embed'));
-        }
-    }
 });

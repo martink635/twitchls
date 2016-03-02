@@ -26,13 +26,11 @@
         <div class="container-fluid">
             <div class="row no-padding">
                 <div class="stream col-md-9" id="stream">
-                    <iframe
-                        src="http://player.twitch.tv/?channel={{ $stream->channel->name }}&autoplay=true{{ \Session::get('html5') ? '&html5=true ' : '' }}"
+                    <iframe src="http://player.twitch.tv/?channel={{ $stream->channel->name }}&autoplay=true{{ \Session::get('html5') ? '&html5=true ' : '' }}"
                         frameborder="0"
                         scrolling="no"
                         allowfullscreen="no">
                     </iframe>
-                    <iframe frameborder="0" scrolling="no" src="http://www.twitch.tv//embed"></iframe>
                 </div>
 
                 <div class="chat col-md-3" id="chat">

@@ -1,7 +1,6 @@
 'use strict';
 
 var browser = require('./modules/browser');
-var hotkeys = require('hotkeys-js');
 
 browser.ready(function() {
 

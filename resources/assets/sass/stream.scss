@@ -45,7 +45,8 @@ iframe {
     border: none;
     background-color: transparent;
     color: $twitch-color;
-    outline: none
+    outline: none;
+    box-shadow: none;
 }
 
 .stream-buttons button:hover {

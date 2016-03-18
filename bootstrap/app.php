@@ -2,7 +2,9 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-Dotenv::load(__DIR__.'/../');
+if (getenv('TRAVIS') !== 'true') {
+	Dotenv::load(__DIR__.'/../');
+}
 
 /*
 |--------------------------------------------------------------------------

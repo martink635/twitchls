@@ -1,0 +1,16 @@
+{
+    "plugins": [ "html" ],
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
+    "rules": {
+        "indent": [2, 2],
+        "semi": [2, "never"],
+        "comma-dangle": [2, "never"],
+        "prefer-const": "error",
+        "no-const-assign": "error",
+        "object-shorthand": "error",
+        "prefer-arrow-callback": "error"
+    }
+}

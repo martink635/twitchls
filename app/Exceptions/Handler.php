@@ -3,8 +3,13 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+
+use Twitch\Exceptions\ConnectionException;
 
 class Handler extends ExceptionHandler
 {
@@ -14,8 +19,12 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
+        AuthorizationException::class,
         HttpException::class,
+        ModelNotFoundException::class,
+        ValidationException::class,
     ];
+
     /**
      * Report or log an exception.
      *
@@ -26,7 +35,7 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $e)
     {
-        return parent::report($e);
+        parent::report($e);
     }
 
     /**
@@ -38,10 +47,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        if (env('APP_DEBUG') == true) {
-            return parent::render($request, $e);
-        } else {
-            return view('errors.custom');
-        }
+        return parent::render($request, $e);
     }
 }

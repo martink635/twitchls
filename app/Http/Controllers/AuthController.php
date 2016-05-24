@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Auth\Twitch;
+use Twitchls\Auth\Twitch;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller

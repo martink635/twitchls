@@ -1,57 +1,135 @@
-$brand-primary: #3f51b5;
+@import "variables";
+@import "node_modules/bootstrap/scss/bootstrap.scss";
+@import "nprogress";
 
-$twitch-color: #6441BD;
-$twitch-chat-background: #f2f2f2;
-
-$font-size-base: 16px !default;
-
-$navbar-height: 70px !default;
-$navbar-default-bg: #ffffff;
-$navbar-default-link-color: $brand-primary;
-$navbar-default-border: #e7e7e7;
-
-@import "node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
-
-
+@import "icons";
 @import "navbar";
-@import "tabs";
-@import "streamlist";
 @import "stream";
-@import "page";
-@import "footer";
 
-.logo {
-    font-weight: 300;
-    color: #333;
+body {
+  font-family: -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
 }
 
-.logo .blue {
-    font-weight: 600;
-    color: $brand-primary;
+.main-container {
+  margin-top: 80px;
+}
+
+footer {
+  background-color: #fcfcfe;
+  margin-top: 42px;
+  border-top: 1px solid #e7e7e7;
+  padding-top: 25px;
+  padding-bottom: 40px;
+}
+
+.form-control:focus {
+  border-color: #ccc;
+}
+
+
+// Vue select
+.highlight a,
+li:hover > a {
+  color: $brand-primary !important;
+}
+.active a {
+  color: $brand-primary !important;
+}
+
+// App.Vue
+.bg-faded {
+  background-color: #fcfcfe;
+}
+
+.row {
+  margin-bottom: 2rem;
+}
+
+// Error.Vue
+.alert-danger {
+  background-color: transparent;
+  border-color: #a94442;
+}
+
+// Settings.Vue
+h1 {
+  margin-bottom: 1em;
 }
 
 .alert {
-    margin-bottom: 0;
+  margin-top: 2em;
 }
 
-.center-block {
-    float: none;
-    margin: 0 auto;
+// StreamItem.Vue
+.card-img {
+  border-radius: 0.1rem;
 }
 
-.form-horizontal .form-group {
-    margin-left: 15px;
-    margin-right: 15px;
+.card {
+  cursor: pointer;
+  border: none;
+  margin-bottom: 2rem;
 }
 
-.no-overflow {
-    overflow-y: hidden;
+.card-footer {
+  border: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow:hidden;
+  padding: .5rem 1rem;
 }
 
-.streams, .followed {
-    margin-top: 20px;
+.card-title, .card-text {
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 }
 
-h2 {
-    font-size: 20px;
+.card-title {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+  font-weight: 400;
+}
+
+.card-inverse .card-text {
+  font-size: 0.9rem;
+  font-weight: 200;
+  color: rgba(255,255,255,.8);
+}
+
+// StreamList.Vue
+.dropdown-toggle::after {
+  border: none;
+}
+
+.dropdown-menu > li > a {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: 400;
+  line-height: 1.42857143;
+  color: #333;
+  white-space: nowrap;
+}
+
+input[type=search] {
+  padding: .375rem .75rem !important;
+}
+
+.selected-tag {
+  background-color: transparent !important;
+  border: none !important;
+  margin-left: 10px !important;
+}
+
+.button {
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
 }

@@ -1,32 +1,31 @@
 <?php
 
-$app->get('/', 'App\Http\Controllers\StreamsController@index');
+Route::group(['middleware' => ['web']], function () {
 
-$app->get('/about', function() {
-    return view('about');
-});
-
-$app->get('/api/v1/games/{limit}', 'App\Http\Controllers\ApiController@games');
-$app->get('/api/v1/streams/{limit}/{offset}', 'App\Http\Controllers\ApiController@all');
-$app->get('/api/v1/streams/{limit}/{offset}/{game}', 'App\Http\Controllers\ApiController@all');
-$app->get('/api/v1/followed/{limit}/{offset}/{identifier}', 'App\Http\Controllers\ApiController@followed');
-$app->get('/api/v1/search/', 'App\Http\Controllers\ApiController@search');
-$app->get('/api/v1/search/{query}', 'App\Http\Controllers\ApiController@search');
-
-$app->get('/login', 'App\Http\Controllers\AuthController@login');
-$app->get('/logout', 'App\Http\Controllers\AuthController@logout');
-$app->get('/callback', 'App\Http\Controllers\AuthController@callback');
-
-if (getenv('APP_DEBUG') == false) {
-    $app->get('/flush', function() {
-        \Session::flush();
-        \Cache::flush();
+    // Api v1 routes
+    Route::group(['prefix' => 'api/v1', 'namespace' => 'Api\v1'], function () {
+        Route::get('games', 'GameController@top');
+        Route::get('streams', 'StreamController@all');
+        Route::get('streams/{name}', 'StreamController@get');
+        Route::get('followed', 'StreamController@followed');
+        Route::get('search', 'SearchController@streams');
     });
-}
 
-$app->get('/html5', function() {
-    \Session::set('html5', ! \Session::get('html5'));
-    return redirect()->back();
+    // Authentication routes
+    Route::get('login', 'AuthController@login');
+    Route::get('logout', 'AuthController@logout');
+    Route::get('callback', 'AuthController@callback');
+
+    // Clear cache, used for debugging.
+    if (getenv('APP_ENV') !== 'production') {
+        Route::get('flush', function () {
+            \Session::flush();
+            \Cache::flush();
+        });
+    }
+
+    // Captures Vue.js routes
+    Route::get('/{vue_capture?}', function () {
+        return view('index');
+    })->where('vue_capture', '[\/\w\.-]*');
 });
-
-$app->get('/{stream}', 'App\Http\Controllers\StreamsController@show');

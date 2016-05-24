@@ -1,78 +1,162 @@
-iframe {
-    min-height: 100vh;
-    min-width: 100%;
-    bottom: 0;
+
+.btn-group .btn + .btn {
+  margin-left: 0;
 }
 
-.container-fluid {
-    padding: 0px;
-    margin: 0px;
+.stream__buttons {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  border: none;
+  outline: none;
+  z-index: 2000;
 }
 
-.row.no-padding {
-  margin-right:0;
-  margin-left:0;
+.stream__button,
+.stream__button:active,
+.stream__button:focus,
+.stream__button:active:focus,
+.stream__button:active:hover {
+  padding: 8px;
+  background-color: transparent;
+  color: $brand-twitch;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  box-shadow: none;
 }
 
-.row.no-padding > [class*='col-'] {
-  padding-right:0;
-  padding-left:0;
+.stream__button:hover {
+  color: rgba(128, 128, 128, 0.5);
+  background-color: transparent;
+  outline: none
 }
 
-.stream-buttons {
-    z-index: 100;
+.stream__button--overlayed,
+.stream__button--overlayed:active,
+.stream__button--overlayed:focus,
+.stream__button--overlayed:active:focus {
+  color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+
+.stream__button--overlayed:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.stream {
+  z-index: 1050;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding:0;
+  margin:0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.stream__player {
+   background-color: #000;
+   float: left;
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   width: 75%;
+   resize: both;
+}
+
+.stream__chat {
+  z-index: 1100;
+  background-color: #efeef1;
+  left: 75%;
+  float: right;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  right: 0;
+  overflow-y: hidden;
+}
+
+.stream__player iframe, .stream__chat iframe {
+  width: 100%;
+  height: 100%;
+  margin:0;
+  padding:0;
+  border: none;
+  display: block;
+}
+
+.stream__dragbar:after {
+    content:"";
     position: absolute;
-    top: 10px;
-    right: 20px;
-    border: none;
-    outline: none;
+    z-index: -1;
+    top: 30%;
+    bottom: 30%;
+    left: 55%;
+    border-left: 1px solid rgba(128, 128, 128, 0.5);
 }
 
-.stream-button, .btn-on-stream {
-    z-index: 100;
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    border: none;
-    outline: none;
+.stream__dragbar {
+  z-index: 1110;
+  // background-color: rgba(0,255,0,0.5);
+  position: absolute;
+  right: -90px;
+  top: 50vh;
+  height:150px;
+  float: right;
+  width: 180px;
+  cursor: col-resize;
+  transform: translateY(-50%);
 }
 
-.stream-buttons button,
-.stream-buttons button:active,
-.stream-buttons button:focus,
-.stream-buttons button:active:focus,
-.stream-buttons button:active:hover {
-    border: none;
-    background-color: transparent;
-    color: $twitch-color;
-    outline: none;
-    box-shadow: none;
-}
+@media(max-width:48em) {
+  .stream__player {
+    width: 100%;
+  }
+  .stream__chat {
+    left: 0;
+  }
 
-.stream-buttons button:hover {
-    color: #000000;
-    background-color: transparent;
-    outline: none
-}
+  .stream__chat--hidden-sm {
+    display: none;
+  }
 
-.btn-group-on-stream button,
-.btn-group-on-stream button:active,
-.btn-group-on-stream button:focus,
-.btn-group-on-stream button:active:focus,
-.btn-group-on-stream button:active:hover {
+  .stream__dragbar--hidden-sm {
+    display: none;
+  }
+
+  .stream__button--hidden-sm {
+    display: none;
+  }
+
+  .stream__button--overlayed,
+  .stream__button--overlayed:active,
+  .stream__button--overlayed:hover,
+  .stream__button--overlayed:focus,
+  .stream__button--overlayed:active:focus,
+  .stream__button--overlayed:active:hover {
+    font-size: 3em;
     color: rgba(255, 255, 255, 0.2);
-    background-color: rgba(0, 0, 0, 0.1);
-    outline: none;
-    height: 60px;
-    width: 60px;
+  }
 }
 
-.btn-group-on-stream:hover button{
-    background-color: rgba(0, 0, 0, 0.5);
-    border-color: rgba(0, 0, 0, 0.5);;
-    color: rgba(255, 255, 255, 0.5);
-}
+@media(min-width:48em) {
+  .stream__chat--hidden {
+    display: none;
+  }
 
-.btn-group-on-stream button:hover {
-    color: rgba(255, 255, 255, 0.9);
+  .stream__player--full {
+    width: 100% !important;
+  }
+
+  .stream__dragbar--hidden {
+    display: none;
+  }
+
+  .stream__button--hidden {
+    display: none;
+  }
 }

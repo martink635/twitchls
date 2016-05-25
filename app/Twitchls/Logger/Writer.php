@@ -2,9 +2,8 @@
 
 namespace Twitchls\Logger;
 
-use Twitchls\Logger\HandlerInterface;
-use Illuminate\Session\Store;
 use Illuminate\Http\Request;
+use Illuminate\Session\Store;
 
 class Writer
 {
@@ -14,8 +13,9 @@ class Writer
     protected $handler;
 
     /**
-     * Default value
-     * @var boolean
+     * Default value.
+     *
+     * @var bool
      */
     protected $cached = true;
 
@@ -37,9 +37,10 @@ class Writer
     }
 
     /**
-     * Write the log using the given handler
+     * Write the log using the given handler.
      *
-     * @param  string $text
+     * @param string $text
+     *
      * @return void
      */
     public function write($endpoint, $options)
@@ -58,7 +59,7 @@ class Writer
     }
 
     /**
-     * Sets cached to false
+     * Sets cached to false.
      *
      * @return void
      */
@@ -68,7 +69,7 @@ class Writer
     }
 
     /**
-     * Returns CLI if run from CLI, null otherwise
+     * Returns CLI if run from CLI, null otherwise.
      *
      * @return mixed
      */
@@ -77,7 +78,5 @@ class Writer
         if (php_sapi_name() === 'cli') {
             return 'cli';
         }
-
-        return null;
     }
 }

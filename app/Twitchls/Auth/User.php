@@ -8,42 +8,42 @@ use Illuminate\Support\Str;
 class User
 {
     /**
-     * Twitch unique user id
+     * Twitch unique user id.
      *
-     * @var integer
+     * @var int
      */
     public $twitchId;
 
     /**
-     * SHA1 of $twitchId
+     * SHA1 of $twitchId.
      *
      * @var string
      */
     public $id;
 
     /**
-     * Twitch login name
+     * Twitch login name.
      *
      * @var string
      */
     public $name;
 
     /**
-     * Twitch display name
+     * Twitch display name.
      *
      * @var string
      */
     public $display_name;
 
     /**
-     * Twitch API token
+     * Twitch API token.
      *
      * @var string
      */
     public $token;
 
     /**
-     * Random identifier for making API requests
+     * Random identifier for making API requests.
      *
      * @var string
      */
@@ -52,7 +52,8 @@ class User
     /**
      * Set the user properties and return the user.
      *
-     * @param  array  $attributes
+     * @param array $attributes
+     *
      * @return \App\Auth\User
      */
     public function map(array $attributes)

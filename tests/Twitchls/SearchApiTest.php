@@ -4,7 +4,6 @@ use Twitchls\Search;
 
 class SearchApiTest extends TestCase
 {
-
     public function test_games_top()
     {
         $twitchSearch = Mockery::mock('Twitch\Search');
@@ -20,6 +19,6 @@ class SearchApiTest extends TestCase
 
     public function tearDown()
     {
-      Mockery::close();
+        Mockery::close();
     }
 }

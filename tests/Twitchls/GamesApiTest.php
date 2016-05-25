@@ -4,7 +4,6 @@ use Twitchls\Games;
 
 class GamesApiTest extends TestCase
 {
-
     public function test_games_top()
     {
         $twitchGames = Mockery::mock('Twitch\Games');
@@ -20,6 +19,6 @@ class GamesApiTest extends TestCase
 
     public function tearDown()
     {
-      Mockery::close();
+        Mockery::close();
     }
 }

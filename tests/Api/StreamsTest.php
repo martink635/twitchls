@@ -4,13 +4,11 @@ use Twitch\Streams;
 
 class StreamsTest extends TestCase
 {
-
     /**
      * @test
      */
     public function test_get()
     {
-
         $twitch = Mockery::mock('Twitch\Api');
         $twitch->shouldReceive('get')
                ->once()
@@ -56,6 +54,6 @@ class StreamsTest extends TestCase
 
     public function tearDown()
     {
-      Mockery::close();
+        Mockery::close();
     }
 }

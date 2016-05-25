@@ -3,13 +3,13 @@
 namespace Twitchls;
 
 use Twitch\Search as TwitchSearch;
-use Twitchls\Api;
 use Twitchls\Transformers\StreamTransformer;
 
 class Search
 {
     /**
-     * Twitchls Api
+     * Twitchls Api.
+     *
      * @var Twitchls\Api
      */
     protected $api;
@@ -23,14 +23,14 @@ class Search
     /**
      * Retrieves a list of searched streams by query.
      *
-     * @param string  $query
-     * @param integer $limit
-     * @param integer $offset
+     * @param string $query
+     * @param int    $limit
+     * @param int    $offset
+     *
      * @return array
      */
     public function streams($query, $limit, $offset)
     {
-        return $this->api->cachedApiCall(func_get_args(), 'streams', new StreamTransformer);
+        return $this->api->cachedApiCall(func_get_args(), 'streams', new StreamTransformer());
     }
-
 }

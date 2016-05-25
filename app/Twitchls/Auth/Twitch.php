@@ -2,58 +2,65 @@
 
 namespace Twitchls\Auth;
 
-use Twitch\Api as TwitchApi;
-use Twitchls\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Twitch\Api as TwitchApi;
 
 class Twitch
 {
     /**
-     * Twitch Client Id
+     * Twitch Client Id.
+     *
      * @var string
      */
     protected $clientId;
 
     /**
-     * Twitch Client Secret
+     * Twitch Client Secret.
+     *
      * @var string
      */
     protected $clientSecret;
 
     /**
-     * Twitch Redirect URL
+     * Twitch Redirect URL.
+     *
      * @var string
      */
     protected $redirectUrl;
 
     /**
-     * Request
+     * Request.
+     *
      * @var Illuminate\Http\Request
      */
     protected $request;
 
     /**
-     * Twitch API
+     * Twitch API.
+     *
      * @var App\Api\Twitch
      */
     protected $twitch;
 
     /**
-     * List of scopes
+     * List of scopes.
+     *
      * @var array
      */
     protected $scopes = ['user_read'];
 
     /**
-     * Twitch API Token endpoint
+     * Twitch API Token endpoint.
+     *
      * @var string
      */
     protected $tokenUrl = 'oauth2/token';
 
     /**
-     * Twitch full authorization URL
+     * Twitch full authorization URL.
+     *
      * @var string
      */
     protected $authUrl = 'https://api.twitch.tv/kraken/oauth2/authorize';
@@ -88,28 +95,30 @@ class Twitch
     /**
      * Generates the Twitch authentication URL, using the provided state.
      *
-     * @param  string $state
+     * @param string $state
+     *
      * @return string
      */
     protected function getAuthUrl($state)
     {
-        return $this->authUrl . '?' . http_build_query($this->getCodeFields($state));
+        return $this->authUrl.'?'.http_build_query($this->getCodeFields($state));
     }
 
     /**
-     * Setup the URL parameters for the authentication
+     * Setup the URL parameters for the authentication.
      *
-     * @param  string $state
+     * @param string $state
+     *
      * @return array
      */
     protected function getCodeFields($state)
     {
         $fields = [
-            'client_id' => $this->clientId,
-            'redirect_uri' => $this->redirectUrl,
-            'scope' => $this->formatScopes($this->scopes),
+            'client_id'     => $this->clientId,
+            'redirect_uri'  => $this->redirectUrl,
+            'scope'         => $this->formatScopes($this->scopes),
             'response_type' => 'code',
-            'state' => $state
+            'state'         => $state,
         ];
 
         return $fields;
@@ -118,7 +127,8 @@ class Twitch
     /**
      * Format the provided Twitch scopes using a space as a delimiter.
      *
-     * @param  array  $scopes
+     * @param array $scopes
+     *
      * @return string
      */
     protected function formatScopes(array $scopes)
@@ -127,7 +137,7 @@ class Twitch
     }
 
     /**
-     * Retrieves the User from Twitch
+     * Retrieves the User from Twitch.
      *
      * @return \App\Auth\User
      */
@@ -138,11 +148,11 @@ class Twitch
         $user = (array) $this->twitch->auth($token)->get('user');
         $user['token'] = $token;
 
-        return (new User)->map($user);
+        return (new User())->map($user);
     }
 
     /**
-     * Retrieves the access_token
+     * Retrieves the access_token.
      *
      * @return string
      */
@@ -163,18 +173,18 @@ class Twitch
     {
         return [
             'form_params' => [
-                'client_id' => $this->clientId,
+                'client_id'     => $this->clientId,
                 'client_secret' => $this->clientSecret,
-                'grant_type' => 'authorization_code',
-                'redirect_uri' =>$this->redirectUrl,
-                'code' => $this->getCode(),
-                'state' => $this->request->session()->get('state'),
-            ]
+                'grant_type'    => 'authorization_code',
+                'redirect_uri'  => $this->redirectUrl,
+                'code'          => $this->getCode(),
+                'state'         => $this->request->session()->get('state'),
+            ],
         ];
     }
 
     /**
-     * Gets the code from the Request
+     * Gets the code from the Request.
      *
      * @return string
      */

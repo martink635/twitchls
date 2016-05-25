@@ -3,13 +3,13 @@
 namespace Twitchls;
 
 use Twitch\Games as TwitchGames;
-use Twitchls\Api;
 use Twitchls\Transformers\GameTransformer;
 
 class Games
 {
     /**
-     * Twitchls Api
+     * Twitchls Api.
+     *
      * @var Twitchls\Api
      */
     protected $api;
@@ -23,14 +23,14 @@ class Games
     /**
      * Retrieves a list of all streams. Can be filtered by game name.
      *
-     * @param string  $game
-     * @param integer $limit
-     * @param integer $offset
+     * @param string $game
+     * @param int    $limit
+     * @param int    $offset
+     *
      * @return array
      */
     public function top($limit, $offset)
     {
-        return $this->api->cachedApiCall(func_get_args(), 'top', new GameTransformer);
+        return $this->api->cachedApiCall(func_get_args(), 'top', new GameTransformer());
     }
-
 }

@@ -2,19 +2,18 @@
 
 namespace Twitch;
 
-use Twitch\Api;
-
 class Games
 {
-
     /**
-     * Api endpoints
+     * Api endpoints.
+     *
      * @var string
      */
     protected $endpoint;
 
     /**
-     * Twitch Object
+     * Twitch Object.
+     *
      * @var Twitch
      */
     protected $twitch;
@@ -29,17 +28,18 @@ class Games
      * Returns a list of games objects sorted by number of
      * current viewers on Twitch, most popular first.
      *
-     * @param  integer  $limit
-     * @param  integer  $offset
+     * @param int $limit
+     * @param int $offset
+     *
      * @return object
      */
     public function top($limit = 10, $offset = 0)
     {
         $options = [
             'query' => [
-                'limit' => $limit,
+                'limit'  => $limit,
                 'offset' => $offset,
-            ]
+            ],
         ];
 
         return $this->twitch
@@ -47,5 +47,4 @@ class Games
                     ->get($this->endpoint)
                     ->top;
     }
-
 }

@@ -67,8 +67,8 @@ class User
 
         // We store the identifier in the Cache,
         // pointing to a token for safer retrieval
-        \Log::info("Mapping user {$this->name} in cache with identifier {$this->identifier} and token: {$this->token}");
-        Cache::put($this->identifier, $this->token, 0);
+        // We are storing it in cache for the same amount of time the session lasts
+        Cache::put($this->identifier, $this->token, 10080);
 
         return $this;
     }

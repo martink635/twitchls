@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Twitchls\Auth\Twitch;
 use Illuminate\Http\Request;
+use Twitchls\Auth\Twitch;
 
 class AuthController extends Controller
 {
     /**
-     * Twitch Auth
+     * Twitch Auth.
+     *
      * @var Twitch
      */
     protected $auth;
@@ -20,7 +20,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Redirects to Twitch
+     * Redirects to Twitch.
      *
      * @return Response
      */
@@ -33,7 +33,8 @@ class AuthController extends Controller
      * Handles the Twitch callback.
      * Redirects to home.
      *
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return Response
      */
     public function callback(Request $request)
@@ -44,9 +45,10 @@ class AuthController extends Controller
     }
 
     /**
-     * Logout the current Twitch user
+     * Logout the current Twitch user.
      *
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return Response
      */
     public function logout(Request $request)

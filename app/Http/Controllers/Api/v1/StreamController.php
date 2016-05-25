@@ -21,7 +21,8 @@ class StreamController extends Controller
     /**
      * Return a JSON with a list of streams.
      *
-     * @param  Request  $request
+     * @param Request $request
+     *
      * @return Response
      */
     public function all(Request $request)
@@ -36,7 +37,8 @@ class StreamController extends Controller
     /**
      * Return a JSON with a list of streams.
      *
-     * @param  string   $name
+     * @param string $name
+     *
      * @return Response
      */
     public function get($name)
@@ -47,15 +49,16 @@ class StreamController extends Controller
     /**
      * Returns a transformed JSON list of the followed streams.
      *
-     * @param  Request  $request
+     * @param Request $request
+     *
      * @return response
      */
     public function followed(Request $request)
     {
         $identifier = $request->header('identifier');
 
-        if (! \Cache::has($identifier)) {
-            throw new \Exception("Invalid identifier.");
+        if (!\Cache::has($identifier)) {
+            throw new \Exception('Invalid identifier.');
         }
 
         $token = \Cache::get($identifier);

@@ -2,27 +2,26 @@
 
 namespace Twitch;
 
-use Twitch\Api;
-
 class Streams
 {
-
     /**
-     * Api endpoints
-     * @var Array
+     * Api endpoints.
+     *
+     * @var array
      */
     protected $endpoint;
 
     /**
-     * Twitch Object
+     * Twitch Object.
+     *
      * @var Twitch
      */
     protected $twitch;
 
     public function __construct(Api $twitch)
     {
-        $this->endpoint[0] = "streams";
-        $this->endpoint[1] = "streams/followed";
+        $this->endpoint[0] = 'streams';
+        $this->endpoint[1] = 'streams/followed';
         $this->twitch = $twitch;
     }
 
@@ -30,6 +29,7 @@ class Streams
      * Retrieves a single stream by its name.
      *
      * @param  string
+     *
      * @return object
      */
     public function get($name)
@@ -44,18 +44,19 @@ class Streams
      * Twitch API limits the retrieveal to 100 streams at a time.
      *
      * @param  string
-     * @param  integer
-     * @param  integer
+     * @param  int
+     * @param  int
+     *
      * @return object
      */
     public function all($game = '', $limit = 50, $offset = 0)
     {
         $options = [
             'query' => [
-                'limit' => $limit,
+                'limit'  => $limit,
                 'offset' => $offset,
-                'game' => $game
-            ]
+                'game'   => $game,
+            ],
         ];
 
         return $this->twitch
@@ -70,17 +71,18 @@ class Streams
      * Twitch API limits the retrieveal to 100 streams at a time.
      *
      * @param  string
-     * @param  integer
-     * @param  integer
+     * @param  int
+     * @param  int
+     *
      * @return object
      */
     public function followed($token, $limit = 50, $offset = 0)
     {
         $options = [
             'query' => [
-                'limit' => $limit,
-                'offset' => $offset
-            ]
+                'limit'  => $limit,
+                'offset' => $offset,
+            ],
         ];
 
         return $this->twitch

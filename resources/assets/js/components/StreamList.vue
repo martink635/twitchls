@@ -13,7 +13,7 @@
 <script>
 import StreamItem from './StreamItem.vue'
 import store from '../vuex/store'
-import vSelect from 'vue-select'
+import vSelect from './Select.vue'
 import { getStreams, getGames } from '../vuex/actions'
 
 export default {

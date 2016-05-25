@@ -14,7 +14,7 @@ class CreateLogTable extends Migration
             $table->increments('id');
             $table->string('user')->nullable();
             $table->string('endpoint');
-            $table->json('options');
+            $table->text('options');
             $table->string('ip_address', 64);
             $table->boolean('cached');
             $table->timestamps();

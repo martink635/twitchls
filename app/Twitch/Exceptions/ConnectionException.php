@@ -2,8 +2,8 @@
 
 namespace Twitch\Exceptions;
 
-class ConnectionException extends \Exception {
-
+class ConnectionException extends \Exception
+{
     public function __construct()
     {
         $this->message = 'Connection to Twitch.tv API failed.';

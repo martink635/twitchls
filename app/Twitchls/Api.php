@@ -9,31 +9,36 @@ use Twitchls\Transformers\Transformer;
 class Api
 {
     /**
-     * Cache Repository Contract
+     * Cache Repository Contract.
+     *
      * @var Illuminate\Contracts\Cache\Repository
      */
     protected $cache;
 
     /**
-     * Cache persistence in minutes
-     * @var integer
+     * Cache persistence in minutes.
+     *
+     * @var int
      */
     protected $cacheMinutes = 3;
 
     /**
-     * Transformer
+     * Transformer.
+     *
      * @var Twitchls\Transformers\Transformer
      */
     protected $transformer;
 
     /**
-     * Log Writer
+     * Log Writer.
+     *
      * @var Twitchls\Logger\Writer
      */
     protected $log;
 
     /**
-     * Twitch api endpoint resource
+     * Twitch api endpoint resource.
+     *
      * @var mixed
      */
     public $resource;
@@ -46,9 +51,10 @@ class Api
     }
 
     /**
-     * Sets the current resource
+     * Sets the current resource.
      *
      * @param  $resource mixed
+     *
      * @return void
      */
     public function setResource($resource)
@@ -61,18 +67,19 @@ class Api
      * apiCall to get a new array and stores it in the cache before
      * returning it.
      *
-     * @param  array  $args
-     * @param  string $action
-     * @param  TransformerInterface $transformer
-     * @param  bool   $collection
-     * @param  bool   $clearCache
+     * @param array                $args
+     * @param string               $action
+     * @param TransformerInterface $transformer
+     * @param bool                 $collection
+     * @param bool                 $clearCache
+     *
      * @return array
      */
     public function cachedApiCall($args, $action, $transformer, $collection = true)
     {
         $key = $this->getCacheKey($args);
 
-        if (( ! $this->cache->has($key)) || $this->isCli()) {
+        if ((!$this->cache->has($key)) || $this->isCli()) {
             $this->log->requestNotCached();
 
             $obj = $this->apiCall($args, $action, $transformer, $collection);
@@ -80,7 +87,7 @@ class Api
             $this->cache->put($key, $obj, $this->cacheMinutes);
         }
 
-        $this->log->write(get_class($this->resource) . '\\' . $action, $args);
+        $this->log->write(get_class($this->resource).'\\'.$action, $args);
 
         return $this->cache->get($key);
     }
@@ -89,10 +96,11 @@ class Api
      * Performs an API $action call, passes the $args array
      * and transforms the result using the given $transformer.
      *
-     * @param  array  $args
-     * @param  string $action
-     * @param  TransformerInterface $transformer
-     * @param  bool   $collection
+     * @param array                $args
+     * @param string               $action
+     * @param TransformerInterface $transformer
+     * @param bool                 $collection
+     *
      * @return array
      */
     public function apiCall($args, $action, $transformer, $collection = true)
@@ -106,21 +114,22 @@ class Api
      * Returns a string based on the given class name
      * and query options.
      *
-     * @param  array  $args
+     * @param array $args
+     *
      * @return string
      */
     protected function getCacheKey($args)
     {
-        return get_class($this->resource) . "_" . implode('_', $args);
+        return get_class($this->resource).'_'.implode('_', $args);
     }
 
     /**
-     * Returns true if php is invoked from the command line
+     * Returns true if php is invoked from the command line.
      *
-     * @return boolean
+     * @return bool
      */
     protected function isCli()
     {
-        return (php_sapi_name() === 'cli');
+        return php_sapi_name() === 'cli';
     }
 }

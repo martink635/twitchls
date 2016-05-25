@@ -4,7 +4,6 @@ use Twitch\Api;
 
 class TwitchApiTest extends TestCase
 {
-
     /**
      * @test
      * @expectedException Twitch\Exceptions\ConnectionException
@@ -93,6 +92,6 @@ class TwitchApiTest extends TestCase
 
     public function tearDown()
     {
-      Mockery::close();
+        Mockery::close();
     }
 }

@@ -26,7 +26,7 @@
 
         <footer class="text-muted">
             <div class="container">
-                <p><span class="footer__responsive-line"><a href="/"><span class="logo">twitc<span class="logo__hls">hls</span></span></a> <small>Watch Twitch HTML5 streams with chat. </small></span><span class="footer__responsive-line"><small>Available on <a href="https://github.com/mkoterle/twitchls">Github</a>.</small></span></p>
+                <p><span class="footer__responsive-line"><a href="/"><span class="logo">twitc<span class="logo__hls">hls</span></span></a> <small>Watch Twitch HTML5 streams with chat.&nbsp;</small></span><span class="footer__responsive-line"><small>Available on <a href="https://github.com/mkoterle/twitchls">Github</a>.</small></span></p>
             </div>
         </footer>
 

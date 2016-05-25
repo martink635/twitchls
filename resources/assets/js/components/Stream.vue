@@ -75,8 +75,6 @@ export default {
         player.style.width = event.pageX + 'px'
         chat.style.left = event.pageX + 'px'
 
-        console.log(player.style.width)
-
         localStorage.setItem('player_width', player.style.width)
       }
     })

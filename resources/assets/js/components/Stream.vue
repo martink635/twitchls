@@ -2,7 +2,7 @@
 
   <div class="stream">
     <div class="btn-group stream__buttons" role="group" id="buttons">
-      <button class="btn btn-default stream__button stream__button--overlayed icon__left" type="button" @click="toggleChatMobile" title="Show/Hide Twitch chat"></button>
+      <button class="btn btn-default stream__button stream__button--hidden stream__button--overlayed icon__left" type="button" @click="toggleChatMobile" title="Show/Hide Twitch chat"></button>
 
       <button class="btn btn-default stream__button stream__button--hidden-sm icon__right" type="button" @click="toggleChat" title="Show/Hide Twitch chat"></button>
 

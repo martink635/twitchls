@@ -12,11 +12,12 @@ class Transformer
      * @param  $object
      * @param  $transformer
      * @param  $collection
+     *
      * @return array
      */
     public function transform($object, $transformer, $collection = true)
     {
-        if (! $collection) {
+        if (!$collection) {
             return $this->fireTransformer($transformer, $object);
         }
 

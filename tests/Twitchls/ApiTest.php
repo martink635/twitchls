@@ -4,7 +4,6 @@ use Twitchls\Api;
 
 class ApiTest extends TestCase
 {
-
     // Test cached api call
 
     public function test_not_cached_api_call()
@@ -39,7 +38,7 @@ class ApiTest extends TestCase
         $log = Mockery::mock('Twitchls\Logger\Writer');
 
         $api = new Api($cache, $transformer, $log);
-        $api->setResource(new SomeClass);
+        $api->setResource(new SomeClass());
 
         $result = $api->apiCall(['args'], 'doSomething', 'transformer');
 

@@ -73,7 +73,7 @@ export default {
 
   methods: {
     toggleNavbar() {
-      document.querySelectorAll('.navbar-toggler:visible').fireEvent('click')
+      $('.navbar-toggler:visible').click()
     }
   },
 

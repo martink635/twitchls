@@ -15,6 +15,7 @@
 .stream__button,
 .stream__button:active,
 .stream__button:focus,
+.stream__button:hover,
 .stream__button:active:focus,
 .stream__button:active:hover {
   padding: 8px;
@@ -28,17 +29,16 @@
 
 .stream__button:hover {
   color: rgba(128, 128, 128, 0.5);
-  background-color: transparent;
-  outline: none
 }
 
 .stream__button--overlayed,
 .stream__button--overlayed:active,
 .stream__button--overlayed:focus,
-.stream__button--overlayed:active:focus {
+.stream__button--overlayed:hover,
+.stream__button--overlayed:active:focus
+.stream__button--overlayed:active:hover {
   color: rgba(255, 255, 255, 0.2);
   background-color: rgba(0, 0, 0, 0.1);
-  outline: none;
 }
 
 .stream__button--overlayed:hover {
@@ -101,7 +101,6 @@
 
 .stream__dragbar {
   z-index: 1110;
-  // background-color: rgba(0,255,0,0.5);
   position: absolute;
   right: -90px;
   top: 50vh;
@@ -128,18 +127,17 @@
     display: none;
   }
 
-  .stream__button--hidden-sm {
+  .stream__buttons--hidden-sm {
     display: none;
   }
 
-  .stream__button--overlayed,
-  .stream__button--overlayed:active,
-  .stream__button--overlayed:hover,
-  .stream__button--overlayed:focus,
-  .stream__button--overlayed:active:focus,
-  .stream__button--overlayed:active:hover {
+  .stream__button--overlayed {
     font-size: 3em;
     color: rgba(255, 255, 255, 0.2);
+  }
+
+  .stream__button--overlayed:hover {
+    background-color: transparent;
   }
 }
 
@@ -156,7 +154,7 @@
     display: none;
   }
 
-  .stream__button--hidden {
+  .stream__buttons--hidden {
     display: none;
   }
 }

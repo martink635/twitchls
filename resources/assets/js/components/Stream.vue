@@ -1,12 +1,22 @@
 <template>
 
   <div class="stream">
-    <div class="btn-group stream__buttons" role="group" id="buttons">
-      <button class="btn btn-default stream__button stream__button--hidden stream__button--overlayed icon__left" type="button" @click="toggleChatMobile" title="Show/Hide Twitch chat"></button>
 
-      <button class="btn btn-default stream__button stream__button--hidden-sm icon__right" type="button" @click="toggleChat" title="Show/Hide Twitch chat"></button>
+    <div class="btn-group stream__buttons stream__buttons--hidden" role="group" id="buttonsMobile">
 
-      <button class="btn btn-default stream__button icon__fullscreen stream__button--hidden-sm" type="button" id="fullscreen" @click="toggleFullscreen" title="Toggle FullScreen"></button>
+      <button class="btn btn-default stream__button stream__button--overlayed icon__left" type="button" @click="toggleChatMobile" title="Show/Hide Twitch chat"></button>
+
+      <button class="btn btn-default stream__button stream__button--overlayed icon__close" type="button" @click="exitStreamMobile" title="Close stream"></button>
+
+    </div>
+
+
+    <div class="btn-group stream__buttons stream__buttons--hidden-sm" role="group" id="buttons">
+
+      <button class="btn btn-default stream__button icon__right" type="button" @click="toggleChat" title="Show/Hide Twitch chat"></button>
+
+      <button class="btn btn-default stream__button icon__fullscreen" type="button" id="fullscreen" @click="toggleFullscreen" title="Toggle FullScreen"></button>
+
     </div>
 
     <div @keyup.left="resizeChat" class="stream__chat stream__chat--hidden-sm" id="chat">
@@ -74,6 +84,28 @@ export default {
 
   methods: {
 
+    toggleChatMobile(event) {
+      event.target.classList.toggle('icon__right')
+      event.target.classList.toggle('icon__left')
+
+      const buttons = document.getElementById('buttonsMobile')
+
+      Array.prototype.forEach.call(buttons.children, (el) => {
+        el.classList.toggle('stream__button--overlayed')
+      })
+
+      chat.classList.toggle('stream__chat--hidden-sm')
+
+      localStorage.removeItem('player_width')
+
+      player.style.width = 'inherit'
+      chat.style.left = 'inherit'
+    },
+
+    exitStreamMobile(event) {
+      this.$route.router.go(window.history.back())
+    },
+
     toggleChat(event) {
 
       event.target.classList.toggle('icon__right')
@@ -88,17 +120,6 @@ export default {
       chat.classList.toggle('stream__chat--hidden')
       dragbar.classList.toggle('stream__dragbar--hidden')
       player.classList.toggle('stream__player--full')
-    },
-
-    toggleChatMobile(event) {
-      event.target.classList.toggle('icon__right')
-      event.target.classList.toggle('icon__left')
-      event.target.classList.toggle('stream__button--overlayed')
-
-      chat.classList.toggle('stream__chat--hidden-sm')
-
-      player.style.width = 'inherit'
-      chat.style.left = 'inherit'
     },
 
     toggleFullscreen(event) {

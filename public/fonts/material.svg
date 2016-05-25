@@ -9,6 +9,7 @@
 <glyph unicode="&#x20;" horiz-adv-x="512" d="" />
 <glyph unicode="&#xe408;" glyph-name="navigate_before" d="M658 622.667l-196-196 196-196-60-60-256 256 256 256z" />
 <glyph unicode="&#xe409;" glyph-name="navigate_next" d="M426 682.667l256-256-256-256-60 60 196 196-196 196z" />
+<glyph unicode="&#xe5cd;" glyph-name="close" d="M810 664.667l-238-238 238-238-60-60-238 238-238-238-60 60 238 238-238 238 60 60 238-238 238 238z" />
 <glyph unicode="&#xe5d0;" glyph-name="fullscreen" d="M598 724.667h212v-212h-84v128h-128v84zM726 212.667v128h84v-212h-212v84h128zM214 512.667v212h212v-84h-128v-128h-84zM298 340.667v-128h128v-84h-212v212h84z" />
 <glyph unicode="&#xe5d1;" glyph-name="fullscreen_exit" d="M682 596.667h128v-84h-212v212h84v-128zM598 128.667v212h212v-84h-128v-128h-84zM342 596.667v128h84v-212h-212v84h128zM214 256.667v84h212v-212h-84v128h-128z" />
 </font></defs></svg>

@@ -5,6 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
 
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes">
+
         @if (isset($user))
         <meta name="identifier" content="{{ $user->identifier }}">
         @endif
@@ -23,7 +26,7 @@
 
         <footer class="text-muted">
             <div class="container">
-                <p><a href="/"><span class="logo">twitc<span class="logo__hls">hls</span></span></a> <small>Watch Twitch HTML5 streams with chat. Available on <a href="https://github.com/mkoterle/twitchls">Github</a>.</small></p>
+                <p><span class="footer__responsive-line"><a href="/"><span class="logo">twitc<span class="logo__hls">hls</span></span></a> <small>Watch Twitch HTML5 streams with chat. </small></span><span class="footer__responsive-line"><small>Available on <a href="https://github.com/mkoterle/twitchls">Github</a>.</small></span></p>
             </div>
         </footer>
 

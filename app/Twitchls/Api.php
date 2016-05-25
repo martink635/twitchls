@@ -18,7 +18,7 @@ class Api
      * Cache persistence in minutes
      * @var integer
      */
-    protected $cacheMinutes = 2;
+    protected $cacheMinutes = 3;
 
     /**
      * Transformer

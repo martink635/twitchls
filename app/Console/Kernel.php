@@ -26,6 +26,6 @@ class Kernel extends ConsoleKernel
     {
         // Run the task every minute
         $schedule->command('precache')
-                 ->everyMinute();
+                 ->cron('*/2 * * * *');
     }
 }

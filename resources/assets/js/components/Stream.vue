@@ -103,6 +103,11 @@ export default {
     },
 
     exitStreamMobile(event) {
+      if (window.history.length === 0) {
+        this.$route.router.go('/')
+        return
+      }
+
       this.$route.router.go(window.history.back())
     },
 

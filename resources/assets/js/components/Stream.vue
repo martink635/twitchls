@@ -19,15 +19,15 @@
 
     </div>
 
-    <div @keyup.left="resizeChat" class="stream__chat stream__chat--hidden-sm" id="chat">
+    <div class="stream__chat stream__chat--hidden-sm" id="chat">
       <iframe frameborder="0"
               scrolling="no"
               id="twitch_embed_chat"
-              src="https://www.twitch.tv/{{ $route.params.channel }}/chat">
+              src="http://www.twitch.tv/{{ $route.params.channel }}/chat">
       </iframe>
     </div>
     <div class="stream__player" id="player">
-      <iframe src="https://player.twitch.tv/?channel={{ $route.params.channel }}&html5={{ html5playback }}"
+      <iframe src="http://player.twitch.tv/?channel={{ $route.params.channel }}&html5={{ html5playback }}"
               frameborder="0"
               scrolling="no"
               allowfullscreen="no">

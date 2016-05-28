@@ -65,6 +65,7 @@ import { setAuth } from '../vuex/actions'
 import Error from './Error.vue'
 
 export default {
+  name: 'App',
   components: { Error },
   vuex: {
     getters: { auth: state => state.auth },

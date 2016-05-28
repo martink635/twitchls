@@ -20,7 +20,7 @@ import store from '../vuex/store'
 import { getFound, setQuery } from '../vuex/actions'
 
 export default {
-
+  name: 'Search',
   components: { StreamItem },
 
   vuex: {

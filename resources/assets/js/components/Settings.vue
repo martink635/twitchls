@@ -30,6 +30,8 @@ import store from '../vuex/store'
 import Vue from 'vue'
 
 export default {
+  name: 'Settings',
+  
   vuex: {
     getters: { auth: state => state.auth }
   },

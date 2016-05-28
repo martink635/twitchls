@@ -14,7 +14,7 @@ import store from '../vuex/store'
 import { getFollowed } from '../vuex/actions'
 
 export default {
-
+  name: 'Followed',
   components: { StreamItem },
 
   vuex: {
@@ -29,7 +29,7 @@ export default {
 
   attached() {
     if (! this.auth) {
-      return this.$router.go('/')
+      return this.$router.go({path: '/', params: { replace: true}})
     }
 
     this.getFollowed(this.auth)

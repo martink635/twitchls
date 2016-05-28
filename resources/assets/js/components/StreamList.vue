@@ -17,7 +17,7 @@ import vSelect from './Select.vue'
 import { getStreams, getGames } from '../vuex/actions'
 
 export default {
-
+  name: 'StreamList',
   components: { StreamItem, vSelect },
 
   vuex: {

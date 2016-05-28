@@ -39,6 +39,8 @@
 
 <script>
 export default {
+  name: 'Stream',
+
   data() {
     return {
       html5playback: true

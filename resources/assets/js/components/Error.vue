@@ -12,6 +12,7 @@
 import store from '../vuex/store'
 
 export default {
+  name: 'Error',
   vuex: {
     getters: {
       error: state => state.error

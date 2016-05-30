@@ -120,7 +120,7 @@ class Api
      */
     protected function getCacheKey($args)
     {
-        return get_class($this->resource).'_'.implode('_', $args);
+        return str_replace(' ', '', get_class($this->resource).'_'.implode('_', $args));
     }
 
     /**

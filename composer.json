@@ -8,7 +8,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "guzzlehttp/guzzle": "6.1.*",
-        "bugsnag/bugsnag-laravel": "1.*"
+        "bugsnag/bugsnag-laravel": "1.*",
+        "predis/predis": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

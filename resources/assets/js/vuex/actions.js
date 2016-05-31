@@ -3,10 +3,11 @@ import NProgress from 'nprogress'
 
 const apiUrl = '/api/v1/'
 const errorMessage = 'Something went wrong when connecting to the Twitch.tv Api. Please retry in a few seconds.'
+const errorMessageFollowed = 'Something went wrong when connecting to the Twitch.tv Api. Please retry in a few seconds or try logging out and back in.'
 
-function setErrorMessage(dispatch) {
+function setErrorMessage(dispatch, error) {
   NProgress.done()
-  dispatch('SET_ERROR', errorMessage)
+  dispatch('SET_ERROR', error)
 }
 
 function successfulRequest(dispatch) {
@@ -29,7 +30,7 @@ export const getFollowed = ({ dispatch }, identifier) => {
   }).then((response) => {
     dispatch('RECEIVE_FOLLOWED', response.data)
     successfulRequest(dispatch)
-  }, (response) => { setErrorMessage(dispatch) })
+  }, (response) => { setErrorMessage(dispatch, errorMessageFollowed) })
 }
 
 export const getStreams = ({ dispatch }, game, offset = 0) => {
@@ -46,7 +47,7 @@ export const getStreams = ({ dispatch }, game, offset = 0) => {
     if (offset === 0) dispatch('RECEIVE_STREAMS', response.data)
     else dispatch('RECEIVE_STREAMS', response.data, true)
     successfulRequest(dispatch)
-  }, (response) => { setErrorMessage(dispatch) })
+  }, (response) => { setErrorMessage(dispatch, errorMessage) })
 
 }
 
@@ -67,7 +68,7 @@ export const getGames = ({ dispatch }) => {
 
     dispatch('RECEIVE_GAMES', games)
     dispatch('CLEAR_ERROR')
-  }, (response) => { setErrorMessage(dispatch) })
+  }, (response) => { setErrorMessage(dispatch, errorMessage) })
 }
 
 export const getFound = ({ dispatch }, query) => {
@@ -83,6 +84,6 @@ export const getFound = ({ dispatch }, query) => {
   }).then((response) => {
     dispatch('RECEIVE_FOUND', response.data)
     successfulRequest(dispatch)
-  }, (response) => { setErrorMessage(dispatch) })
+  }, (response) => { setErrorMessage(dispatch, errorMessage) })
 
 }

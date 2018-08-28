@@ -23,7 +23,7 @@
       <iframe frameborder="0"
               scrolling="no"
               id="twitch_embed_chat"
-              src="https://www.twitch.tv/{{ $route.params.channel }}/chat">
+              src="https://www.twitch.tv/embed/{{ $route.params.channel }}/chat">
       </iframe>
     </div>
     <div class="stream__player" id="player">

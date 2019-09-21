@@ -21,7 +21,7 @@ class Api
      *
      * @var string
      */
-    const VERSION = 'v3';
+    const VERSION = 'v5';
 
     /**
      * @var GuzzleHttp\Client
@@ -132,7 +132,7 @@ class Api
             'base_uri' => static::URL,
             'headers'  => [
                 'Client-ID' => env('TWITCH_CLIENT_ID', ''),
-                'Accept'    => 'application/vnd.twitchtv.{static::VERSION}+json',
+                'Accept'    => "application/vnd.twitchtv.v5+json",
             ],
         ];
 

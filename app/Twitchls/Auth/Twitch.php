@@ -63,7 +63,7 @@ class Twitch
      *
      * @var string
      */
-    protected $authUrl = 'https://api.twitch.tv/kraken/oauth2/authorize';
+    protected $authUrl = 'https://id.twitch.tv/oauth2/authorize';
 
     /**
      * Sets the Twitch Client information from the environment.

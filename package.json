@@ -1,7 +1,7 @@
 {
   "private": true,
   "devDependencies": {
-    "eslint": "^2.10.2",
+    "eslint": "^4.18.2",
     "eslint-plugin-html": "^1.4.0",
     "gulp": "^3.9.1",
     "laravel-elixir": "^5.0.0",

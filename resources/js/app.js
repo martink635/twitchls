@@ -25,7 +25,7 @@ window.stream = () => {
                 console.log('dragging', this)
             }
         },
-        dragStop($event) {
+        dragStop() {
             this.dragging = false
             this.chatWidth = this.tempChatWidth
             localStorage.setItem('chat-width', this.chatWidth)

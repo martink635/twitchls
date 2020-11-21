@@ -62,8 +62,20 @@ class Streams extends Component
             return [
                 'cursor' => $result->paginator->cursor(),
                 'streams' => collect($result->data())->map(function ($item) {
-                        $item->thumbnail_url = str_replace('{width}', '480', $item->thumbnail_url);
-                        $item->thumbnail_url = str_replace('{height}', '270', $item->thumbnail_url);
+                        $item->thumbnail_352 = str_replace('{width}', '352', $item->thumbnail_url);
+                        $item->thumbnail_352 = str_replace('{height}', '198', $item->thumbnail_352);
+
+                        $item->thumbnail_480 = str_replace('{width}', '480', $item->thumbnail_url);
+                        $item->thumbnail_480 = str_replace('{height}', '270', $item->thumbnail_480);
+
+                        $item->thumbnail_640 = str_replace('{width}', '640', $item->thumbnail_url);
+                        $item->thumbnail_640 = str_replace('{height}', '360', $item->thumbnail_640);
+
+                        $item->thumbnail_768 = str_replace('{width}', '768', $item->thumbnail_url);
+                        $item->thumbnail_768 = str_replace('{height}', '432', $item->thumbnail_768);
+
+                        $item->thumbnail_url = str_replace('{width}', '960', $item->thumbnail_url);
+                        $item->thumbnail_url = str_replace('{height}', '540', $item->thumbnail_url);
 
                         return collect($item)->toArray();
                     })->toArray(),

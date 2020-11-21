@@ -81,7 +81,21 @@
 
         @foreach ($streams as $stream)
             <a href="{{ route('stream', ['stream' => $stream['user_name']]) }}" class="cursor-pointer block relative flex flex-col rounded-lg justify-end overflow-hidden ransition duration-150 group">
-                <img class="w-full" src="{{ $stream['thumbnail_url'] }}" alt="{{ $stream['user_name'] }} streaming {{ $stream['game_name'] }}">
+                <img
+                    class="w-full"
+                    src="{{ $stream['thumbnail_url'] }}"
+                    alt="{{ $stream['user_name'] }} streaming {{ $stream['game_name'] }}"
+
+                    srcset="{{ $stream['thumbnail_352'] }} 352w,
+                            {{ $stream['thumbnail_480'] }} 480w,
+                            {{ $stream['thumbnail_640'] }} 640w,
+                            {{ $stream['thumbnail_768'] }} 768w,
+                            {{ $stream['thumbnail_url'] }} 960w"
+                    sizes="(min-width:72rem) 100vw 350px,
+                           (min-width:1024px) and (max-width: 72rem) 30vw,
+                           (min-width:768px) and (max-width: 1024px) 50vw,
+                           (max-width: 768px) 100vw"
+                >
 
                 <div class="absolute bg-black text-white w-full left-0 right-0 bottom-0 mb-2 px-4 pt-2 pb-2">
                     <div class="font-bold leading-7 text-white truncate text-lg">{{ $stream['title'] }}</div>

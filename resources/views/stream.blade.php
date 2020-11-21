@@ -21,13 +21,13 @@
 
             <div x-show="chat" x-on:mousedown.passive="dragStart($event)" class="cursor-move h-40 w-8 absolute right-0 top-0 bottom-0 my-auto -mr-4 "></div>
 
-            {{-- <iframe
+            <iframe
                 src="https://player.twitch.tv/?channel={{ strtolower($stream) }}&parent={{ request()->getHttpHost() }}&scrolling=no&muted=false&autoplay=true"
                 class="w-full h-full"
                 frameborder="0"
                 scrolling="no"
                 allowfullscreen="no"
-            ></iframe> --}}
+            ></iframe>
         </main>
         <aside x-show="chat" x-ref="chat">
             <iframe

@@ -22,28 +22,17 @@ class Streams extends Component
     public function mount()
     {
         $this->getStreams();
-
         $twitch = new Twitch;
-        $result = $twitch->getTopGames(['first' => 50]);
-        $this->games = collect($result->data())->map(function ($item) {
-            return collect($item)->toArray();
-        })->toArray();
+
+        $this->games = \Cache::remember('games', 180, function() use($twitch) {
+            $result = $twitch->getTopGames(['first' => 50]);
+
+            return collect($result->data())->map(function ($item) {
+                return collect($item)->toArray();
+            })->toArray();
+        });
 
         $this->filteredGames = $this->games;
-
-        // $this->streams = \Cache::remember('streams', 60, function() use($twitch) {
-        //     $result = $twitch->getStreams();
-        //     $cusror = $twitch->getStreams()->paginator->cursor();
-
-
-        //     return collect($twitch->getStreams()->data())->map(function ($item) {
-        //         $item->thumbnail_url = str_replace('{width}', '1280', $item->thumbnail_url);
-        //         $item->thumbnail_url = str_replace('{height}', '720', $item->thumbnail_url);
-
-        //         return $item;
-        //     });
-        // });
-
     }
 
     public function incrementHighlight()
@@ -66,19 +55,23 @@ class Streams extends Component
 
     private function getStreams($cursor = null)
     {
-        $twitch = new Twitch;
-        $result = $twitch->getStreams(['first' => 18, 'after' => $cursor, 'game_id' => $this->filter ]);
+        $cache = \Cache::remember("streams_{$cursor}_{$this->filter}", 120, function() use($cursor) {
+            $twitch = new Twitch;
+            $result = $twitch->getStreams(['first' => 18, 'after' => $cursor, 'game_id' => $this->filter ]);
 
-        $this->streams = array_merge($this->streams,
-            collect($result->data())->map(function ($item) {
-                $item->thumbnail_url = str_replace('{width}', '480', $item->thumbnail_url);
-                $item->thumbnail_url = str_replace('{height}', '270', $item->thumbnail_url);
+            return [
+                'cursor' => $result->paginator->cursor(),
+                'streams' => collect($result->data())->map(function ($item) {
+                        $item->thumbnail_url = str_replace('{width}', '480', $item->thumbnail_url);
+                        $item->thumbnail_url = str_replace('{height}', '270', $item->thumbnail_url);
 
-                return collect($item)->toArray();
-            })->toArray()
-        );
+                        return collect($item)->toArray();
+                    })->toArray(),
+            ];
+        });
 
-        $this->cursor = $result->paginator->cursor();
+        $this->streams = array_merge($this->streams, $cache['streams']);
+        $this->cursor = $cache['cursor'];
     }
 
     public function updatedFilter()

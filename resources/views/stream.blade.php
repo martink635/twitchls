@@ -34,7 +34,6 @@
                 frameborder="0"
                 class="w-full h-full"
                 scrolling="no"
-                id="twitch_embed_chat"
                 x-bind:src="`https://www.twitch.tv/embed/{{ strtolower($stream) }}/chat?&parent={{ request()->getHttpHost() }}${mode}`"
             ></iframe>
         </aside>

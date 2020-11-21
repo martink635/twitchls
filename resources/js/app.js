@@ -15,17 +15,21 @@ window.stream = () => {
         dragStart($event) {
             this.dragging = true
             this.startDrag = $event.pageX
+            console.log('dragStart', this)
         },
         dragMove($event) {
             if (this.dragging) {
                 this.tempChatWidth = this.chatWidth + this.startDrag - $event.pageX
                 this.$refs.chat.style.width = this.tempChatWidth + 'px'
+
+                console.log('dragging', this)
             }
         },
         dragStop($event) {
             this.dragging = false
             this.chatWidth = this.tempChatWidth
             localStorage.setItem('chat-width', this.chatWidth)
+            console.log('dragStop', this)
         },
         toggleFullscreen() {
             if (

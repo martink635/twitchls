@@ -71,8 +71,8 @@ class Streams extends Component
 
         $this->streams = array_merge($this->streams,
             collect($result->data())->map(function ($item) {
-                $item->thumbnail_url = str_replace('{width}', '1280', $item->thumbnail_url);
-                $item->thumbnail_url = str_replace('{height}', '720', $item->thumbnail_url);
+                $item->thumbnail_url = str_replace('{width}', '480', $item->thumbnail_url);
+                $item->thumbnail_url = str_replace('{height}', '270', $item->thumbnail_url);
 
                 return collect($item)->toArray();
             })->toArray()

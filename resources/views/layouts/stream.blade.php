@@ -9,14 +9,12 @@
     <title>{{ $stream }} - Twitchls</title>
 
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-
-    <script src="{{ mix('/js/app.js') }}" defer></script>
 </head>
 <body class="dark:bg-black">
 
     @yield('content')
 
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="{{ mix('/js/app.js') }}"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ed70b0896cb771aca9d1fdd5f571e879",
+    "content-hash": "7f8e632b34b0038212c2f923d6dd9148",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -888,6 +888,35 @@
                 "source": "https://github.com/guzzle/psr7/tree/1.7.0"
             },
             "time": "2020-09-30T07:37:11+00:00"
+        },
+        {
+            "name": "koterle/envoy-oven",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mkoterle/envoy-oven.git",
+                "reference": "22417d2e1da8683df12f10adfd0e61d6050c565b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mkoterle/envoy-oven/zipball/22417d2e1da8683df12f10adfd0e61d6050c565b",
+                "reference": "22417d2e1da8683df12f10adfd0e61d6050c565b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "'Zero-downtime' deployments with symlinks and rollbacks.",
+            "support": {
+                "issues": "https://github.com/mkoterle/envoy-oven/issues",
+                "source": "https://github.com/mkoterle/envoy-oven/tree/2.0.0"
+            },
+            "time": "2019-12-08T11:50:04+00:00"
         },
         {
             "name": "laravel/framework",

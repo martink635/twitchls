@@ -15,7 +15,8 @@ module.exports = {
 
       gray: {
         '100': '#DFE7E8',
-        '500': '#839C9E'
+        '500': '#839C9E',
+        '900': '#1A1E1F'
       },
 
       teal: {
@@ -43,7 +44,10 @@ module.exports = {
         },
         spacing: {
             '2px': '2px',
-        }
+        },
+        cursor: {
+            'col-resize': 'col-resize'
+        },
     },
   },
   variants: {

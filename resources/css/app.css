@@ -4,10 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-    @apply font-sans antialiased text-black;
-}
-
 ::selection {
     @apply text-white bg-teal-500;
 }

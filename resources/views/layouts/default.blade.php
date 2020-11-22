@@ -7,50 +7,51 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Twitchls - alternative twitch.tv listing</title>
+    <title>Twitchls - Alternative Twitch.tv listing</title>
+
+    <link rel="icon" href="favicon.svg">
+    <link rel="mask-icon" href="favicon-mask.svg" color="#38B2AC">
 
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+
     @livewireStyles
 
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 </head>
 
-<body class="">
+<body class="font-sans antialiased text-black dark:bg-black dark:text-white">
 
     <div class="w-full h-1 bg-teal-500"></div>
 
-    <header class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between py-10">
+    <header class="flex flex-col justify-between max-w-6xl px-4 py-10 mx-auto sm:px-6 sm:flex-row">
         <a href="{{ route('home') }}">
             <x-logo /></a>
 
-        <div class="flex space-x-4 mt-4 sm:mt-0">
-            <x-link href="{{ route('about') }}">About</x-link>
+        <div class="flex mt-4 space-x-4 sm:mt-0">
+            <x-primary href="{{ route('about') }}">About</x-primary>
             @guest
-            <x-link>Log In with Twitch.tv</x-link>
-            {{-- <a href="{{ route('login.twitch') }}" class="text-indigo-600 hover:text-indigo-800
-            hover:underline">Login using Twitch</a> --}}
+            <x-primary href="{{ route('login') }}">Log In with Twitch.tv</x-primary>
             @endguest
 
             @auth
-            <x-link>Log out</x-link>
+            <x-primary href="{{ route('logout') }}">Log out</x-primary>
             @endauth
         </div>
 
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 sm:px-6">
+    <main class="max-w-6xl px-4 mx-auto sm:px-6">
         @yield('content')
     </main>
 
     <footer
-        class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col space-y-4 sm:space-y-0 sm:flex-row justify-between mt-16 sm:mt-32 mb-8 sm:mb-16 text-gray-500 text-sm">
+        class="flex flex-col justify-between max-w-6xl px-4 mx-auto mt-16 mb-8 space-y-4 text-sm text-gray-500 sm:px-6 sm:space-y-0 sm:flex-row sm:mt-32 sm:mb-16">
         <a href="{{ route('home') }}">
             <x-logo /></a>
-        <span>Alternative Twitch.tv listing with chat. Available on <a
-                class="underline hover:text-teal-900 transition duration-150"
-                href="https://github.com/martink635/twitchls" rel="nofollow" target="_blank">Github</a>.</span>
-        <span>Designed with <span class="text-red-500">♥</span> by <a href="https://urska.design"
-                class="underline hover:text-teal-900 transition duration-150" target="_blank">urska.design</a></span>
+        <span>Alternative Twitch.tv listing with chat. Available on <x-link
+                href="https://github.com/martink635/twitchls" rel="nofollow" target="_blank">Github</x-link>.</span>
+        <span>Designed with <span class="text-red-500">♥</span> by <x-link href="https://urska.design" target="_blank">
+                urska.design</x-link></span>
     </footer>
 
     @livewireScripts

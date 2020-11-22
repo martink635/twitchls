@@ -4,7 +4,8 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use romanzipp\Twitch\Twitch;
-use romanzipp\Twitch\Helpers\Paginator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class Streams extends Component
 {
@@ -14,23 +15,36 @@ class Streams extends Component
     public $filter = null;
     public $filterName = '';
     public $cursor = null;
+    public $next = true;
 
     public $filteredGames = [];
     public $highlightIndex = 0;
     public $query = '';
 
-    public function mount()
+    protected Twitch $twitch;
+
+    public function mount(Twitch $twitch)
     {
-        $this->getStreams();
-        $twitch = new Twitch;
+        if (Auth::user()) {
+            $this->filter = 'followed';
+        }
 
-        $this->games = \Cache::remember('games', 180, function() use($twitch) {
-            $result = $twitch->getTopGames(['first' => 50]);
+        $this->getStreams($twitch);
+        $this->twitch = $twitch;
 
-            return collect($result->data())->map(function ($item) {
-                return collect($item)->toArray();
-            })->toArray();
-        });
+        $this->games = Cache::remember(
+            'games', 180, function () {
+                $result = $this->twitch->getTopGames(['first' => 50]);
+
+                return collect(
+                    $result->data()
+                )->map(
+                    function ($item) {
+                        return collect($item)->toArray();
+                    }
+                )->toArray();
+            }
+        );
 
         $this->filteredGames = $this->games;
     }
@@ -53,43 +67,72 @@ class Streams extends Component
         $this->highlightIndex--;
     }
 
-    private function getStreams($cursor = null)
+    private function getStreams(Twitch $twitch, $cursor = null)
     {
-        $cache = \Cache::remember("streams_{$cursor}_{$this->filter}", 120, function() use($cursor) {
-            $twitch = new Twitch;
-            $result = $twitch->getStreams(['first' => 18, 'after' => $cursor, 'game_id' => $this->filter ]);
+        $this->twitch = $twitch;
 
-            return [
-                'cursor' => $result->paginator->cursor(),
-                'streams' => collect($result->data())->map(function ($item) {
-                        $item->thumbnail_352 = str_replace('{width}', '352', $item->thumbnail_url);
-                        $item->thumbnail_352 = str_replace('{height}', '198', $item->thumbnail_352);
+        $query = ['first' => 18, 'after' => $cursor];
+        $cacheKey = "streams_{$cursor}_{$this->filter}";
 
-                        $item->thumbnail_480 = str_replace('{width}', '480', $item->thumbnail_url);
-                        $item->thumbnail_480 = str_replace('{height}', '270', $item->thumbnail_480);
+        if (Auth::user() && $this->filter === 'followed') {
+            $id = Auth::id();
 
-                        $item->thumbnail_640 = str_replace('{width}', '640', $item->thumbnail_url);
-                        $item->thumbnail_640 = str_replace('{height}', '360', $item->thumbnail_640);
+            $follows = Cache::remember(
+                "followed_users_{$id}", 300, function () {
+                    $result = $this->twitch->getUsersFollows(['from_id' => Auth::id(), 'first' => 100]);
 
-                        $item->thumbnail_768 = str_replace('{width}', '768', $item->thumbnail_url);
-                        $item->thumbnail_768 = str_replace('{height}', '432', $item->thumbnail_768);
+                    return collect(
+                        $result->data()
+                    )->map(
+                        function ($item) {
+                            return $item->to_id;
+                        }
+                    )->toArray();
+                }
+            );
 
-                        $item->thumbnail_url = str_replace('{width}', '960', $item->thumbnail_url);
-                        $item->thumbnail_url = str_replace('{height}', '540', $item->thumbnail_url);
+            $query['user_id'] = $follows;
+            $cacheKey = "streams_{$cursor}_{$id}";
+        } else {
+            $query['game_id'] = $this->filter;
+        }
 
-                        return collect($item)->toArray();
-                    })->toArray(),
-            ];
-        });
+        $cache = Cache::remember(
+            $cacheKey, 120, function () use ($query) {
+                $result = $this->twitch->getStreams($query);
+
+                return [
+                    'next' => $result->hasMoreResults(),
+                    'cursor' => $result->paginator->cursor(),
+                    'streams' => collect(
+                        $result->data()
+                    )->map(
+                        function ($item) {
+                            $item->thumbnail_352 = str_replace('{width}', '352', $item->thumbnail_url);
+                            $item->thumbnail_352 = str_replace('{height}', '198', $item->thumbnail_352);
+
+                            $item->thumbnail_480 = str_replace('{width}', '480', $item->thumbnail_url);
+                            $item->thumbnail_480 = str_replace('{height}', '270', $item->thumbnail_480);
+
+                            $item->thumbnail_640 = str_replace('{width}', '640', $item->thumbnail_url);
+                            $item->thumbnail_640 = str_replace('{height}', '360', $item->thumbnail_640);
+
+                            $item->thumbnail_768 = str_replace('{width}', '768', $item->thumbnail_url);
+                            $item->thumbnail_768 = str_replace('{height}', '432', $item->thumbnail_768);
+
+                            $item->thumbnail_url = str_replace('{width}', '960', $item->thumbnail_url);
+                            $item->thumbnail_url = str_replace('{height}', '540', $item->thumbnail_url);
+
+                            return collect($item)->toArray();
+                        }
+                    )->toArray(),
+                ];
+            }
+        );
 
         $this->streams = array_merge($this->streams, $cache['streams']);
         $this->cursor = $cache['cursor'];
-    }
-
-    public function updatedFilter()
-    {
-        $this->streams = [];
-        $this->getStreams();
+        $this->next = $cache['next'];
     }
 
     public function updatedQuery()
@@ -99,38 +142,35 @@ class Streams extends Component
             return;
         }
 
-        $this->filteredGames = collect($this->games)->filter(function ($item) {
-            return strpos(strtolower($item['name']), strtolower($this->query)) === false ? false : true;
-        })->toArray();
+        $this->filteredGames = collect(
+            $this->games
+        )->filter(
+            function ($item) {
+                return strpos(strtolower($item['name']), strtolower($this->query)) === false ? false : true;
+            }
+        )->toArray();
     }
 
-    public function filterBy($game_id)
+    public function filterBy(Twitch $twitch, $value)
     {
-        $this->filter = $game_id;
-        $this->filterName = collect($this->games)->where('id', $this->filter)->first()['name'];
+        $this->filter = $value;
         $this->streams = [];
-        $this->getStreams();
+
+        if ($this->filter !== null && $this->filter !== 'followed') {
+            $this->filterName = collect($this->games)->where('id', $this->filter)->first()['name'];
+        }
+
+        $this->getStreams($twitch);
     }
 
-    public function filterByHighlight()
+    public function filterByHighlight(Twitch $twitch)
     {
-        $this->filter = $this->filteredGames[$this->highlightIndex]['id'];
-        $this->filterName = collect($this->games)->where('id', $this->filter)->first()['name'];
-        $this->streams = [];
-        $this->getStreams();
+        $this->filterBy($twitch, $this->filteredGames[$this->highlightIndex]['id']);
     }
 
-    public function resetFilter()
+    public function loadMore(Twitch $twitch, $cursor)
     {
-        $this->filter = null;
-        $this->filterName = '';
-        $this->streams = [];
-        $this->getStreams();
-    }
-
-    public function loadMore($cursor)
-    {
-        $this->getStreams($cursor);
+        $this->getStreams($twitch, $cursor);
     }
 
     public function render()

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
@@ -18,14 +20,40 @@ class LoginController extends Controller
     }
 
     /**
+     * Logs the user out and redirects to home
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleLogout()
+    {
+        Auth::logout();
+
+        return redirect()->route('home');
+    }
+
+    /**
      * Obtain the user information from GitHub.
      *
      * @return \Illuminate\Http\Response
      */
     public function handleProviderCallback()
     {
-        $user = Socialite::driver('twitch')->user();
+        $social = Socialite::driver('twitch')->user();
 
-        dd($user->token);
+        $user = User::firstOrCreate(
+            [
+                'id' => $social->getId()
+            ],
+            [
+                'refresh_token' => $social->refreshToken,
+                'token' => $social->token,
+                'email' => $social->getEmail(),
+                'name' => $social->getName()
+            ]
+        );
+
+        Auth::login($user);
+
+        return redirect()->route('home');
     }
 }

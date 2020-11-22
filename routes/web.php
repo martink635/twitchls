@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 
-Route::get('login/twitch', [LoginController::class, 'redirectToProvider'])->name('login.twitch');
+Route::get('login/twitch', [LoginController::class, 'redirectToProvider'])->name('login');
 Route::get('login/twitch/callback', [LoginController::class, 'handleProviderCallback']);
+Route::get('logout/twitch', [LoginController::class, 'handleLogout'])->name('logout');
 
 Route::get('/', function () {
     return view('index');

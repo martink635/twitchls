@@ -38,7 +38,7 @@
                         @if ($filter && $filter !== 'followed')
                         <span class="truncate">{{ $this->filterName }}</span>
                         @else
-                        <span>Type your favorite game here</span>
+                        <span>Filter by game</span>
                         @endif
                         <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">

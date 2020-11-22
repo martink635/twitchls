@@ -54,7 +54,7 @@
                         style="max-height: 256px;">
                         @foreach ($filteredGames as $item)
                         <div wire:click="filterBy('{{ $item['id'] }}')" x-on:click="open = false"
-                            class="flex space-x-4 w-full items-center justify-between w-full cursor-pointer group {{ $highlightIndex === $loop->index ? 'text-teal-500': '' }}">
+                            class="flex space-x-4 w-full items-center justify-between cursor-pointer group {{ $highlightIndex === $loop->index ? 'text-teal-500': '' }}">
                             <div class="flex flex-grow space-x-2 truncate">
                                 <x-secondary class="truncate">{{ $item['name'] }}</x-secondary>
                                 @if ($filter === $item['id'])

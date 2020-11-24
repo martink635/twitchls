@@ -4,7 +4,7 @@
     <div class="col-md-6 col-md-offset-3">
       <h1>About</h1>
 
-      <p>This is an open source project, enabling you to watch streams using HLS techonolgy instead of Flash. It uses significantly less power on a Mac. It also has the option to display the Twitch chat, which thanks to the new Twitch update also loads without using Flash.</p>
+      <p>This is an open source project, enabling you to watch streams using HLS technology instead of Flash. It uses significantly less power on a Mac. It also has the option to display the Twitch chat, which thanks to the new Twitch update also loads without using Flash.</p>
 
       <p>There is an experimental feature that enables HTML5 streams on new browsers (tested on Chrome and Firefox). By default it's turned on.</p>
 

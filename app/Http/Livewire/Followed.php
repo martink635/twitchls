@@ -24,6 +24,12 @@ class Followed extends Component
         $this->getStreams($twitch);
     }
 
+    public function poll(Twitch $twitch)
+    {
+        $this->streams = [];
+        $this->getStreams($twitch);
+    }
+
     private function getStreams(Twitch $twitch, $cursor = null)
     {
         $this->twitch = $twitch;

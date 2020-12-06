@@ -1,6 +1,6 @@
 @if (Auth::user() && !is_null(Auth::user()->settings) && Auth::user()->settings['followed'])
 
-<div wire:poll.60s class="relative hidden w-12 md:block dark:bg-gray-900" x-data="{ show: false }"
+<div wire:poll.60s="poll" class="relative hidden w-12 md:block dark:bg-gray-900" x-data="{ show: false }"
     x-on:mouseenter="show = true" x-on:mouseleave="show = false">
 
     <div x-cloak :class="{ 'w-64 z-20': show, 'w-12': !show }"

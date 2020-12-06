@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\StreamController;
+use App\Http\Controllers\PreviewController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\Auth\LoginController;
 
@@ -17,4 +18,5 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/', HomeController::class)->name('home');
 Route::get('/about', AboutController::class)->name('about');
+Route::get('/preview', PreviewController::class)->name('preview');
 Route::get('/{stream}', StreamController::class)->name('stream');

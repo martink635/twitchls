@@ -23,6 +23,12 @@
 <body class="font-sans antialiased text-black dark:bg-black dark:text-white">
     <div class="w-full h-1 bg-teal-500"></div>
 
+    <div class="absolute left-0 right-0 flex justify-center w-full">
+        <a href="{{ route('preview') }}"
+            class="px-3 py-2 text-xs font-bold uppercase transition duration-100 bg-teal-500 rounded-b-lg hover:bg-teal-900">Preview
+            version</a>
+    </div>
+
     <header class="flex flex-col justify-between max-w-6xl px-4 py-10 mx-auto sm:px-6 sm:flex-row">
         <a href="{{ route('home') }}">
             <x-logo /></a>

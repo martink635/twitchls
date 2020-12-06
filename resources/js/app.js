@@ -10,7 +10,12 @@ window.stream = () => {
         chat: true,
         mode: window.matchMedia('(prefers-color-scheme: dark)').matches ? '&darkpopout' : '',
         init() {
-            this.$refs.chat.style.width = this.chatWidth + 'px'
+            if (window.innerWidth > 768) {
+                this.$refs.chat.style.width = this.chatWidth + 'px'
+            } else {
+                this.$refs.chat.style.width = '100%'
+                this.chat = false
+            }
         },
         toggleChat() {
             this.chat  = !this.chat

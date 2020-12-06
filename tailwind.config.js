@@ -53,6 +53,7 @@ module.exports = {
   variants: {
     extend: {
         backgroundColor: ['responsive', 'hover', 'focus', 'group-hover'],
+        ringWidth: ['hover'],
         textColor: ['responsive', 'hover', 'focus', 'group-hover'],
         width: ['responsive', 'group-hover'],
     },

@@ -7,64 +7,18 @@ use romanzipp\Twitch\Twitch;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
-class Streams extends Component
+class Followed extends Component
 {
-
+    public $filter = 'followed';
     public $streams = [];
-    public $games = [];
-    public $filter = null;
-    public $filterName = '';
-    public $cursor = null;
-    public $next = true;
-
-    public $filteredGames = [];
-    public $highlightIndex = 0;
-    public $query = '';
-
-    protected Twitch $twitch;
 
     public function mount(Twitch $twitch)
     {
-        if (Auth::user()) {
-            $this->filter = 'followed';
+        if (Auth::guest()) {
+            return;
         }
 
         $this->getStreams($twitch);
-        $this->twitch = $twitch;
-
-        $this->games = Cache::remember(
-            'games', 180, function () {
-                $result = $this->twitch->getTopGames(['first' => 50]);
-
-                return collect(
-                    $result->data()
-                )->map(
-                    function ($item) {
-                        return collect($item)->toArray();
-                    }
-                )->toArray();
-            }
-        );
-
-        $this->filteredGames = $this->games;
-    }
-
-    public function incrementHighlight()
-    {
-        if ($this->highlightIndex === count($this->filteredGames) - 1) {
-            return;
-        }
-
-        $this->highlightIndex++;
-    }
-
-    public function decrementHighlight()
-    {
-        if ($this->highlightIndex === 0) {
-            return;
-        }
-
-        $this->highlightIndex--;
     }
 
     private function getStreams(Twitch $twitch, $cursor = null)
@@ -93,8 +47,6 @@ class Streams extends Component
 
             $query['user_id'] = $follows;
             $cacheKey = "streams_{$cursor}_{$id}";
-        } else {
-            $query['game_id'] = $this->filter;
         }
 
         $cache = Cache::remember(
@@ -130,51 +82,25 @@ class Streams extends Component
             }
         );
 
+
+        // Fetch avatars
+        if (count($cache['streams']) > 0) {
+            $ids = $cache['streams']->map(
+                function ($stream) {
+                    return $stream['user_id'];
+                }
+            );
+
+            $result = $this->twitch->getUsers(['user_id' => $ids]);
+
+            // dd($result->data());
+        }
+
         $this->streams = array_merge($this->streams, $cache['streams']->toArray());
-        $this->cursor = $cache['cursor'];
-        $this->next = $cache['next'];
-    }
-
-    public function updatedQuery()
-    {
-        if (empty($this->query)) {
-            $this->filteredGames = $this->games;
-            return;
-        }
-
-        $this->filteredGames = collect(
-            $this->games
-        )->filter(
-            function ($item) {
-                return strpos(strtolower($item['name']), strtolower($this->query)) === false ? false : true;
-            }
-        )->toArray();
-    }
-
-    public function filterBy(Twitch $twitch, $value)
-    {
-        $this->filter = $value;
-        $this->streams = [];
-
-        if ($this->filter !== null && $this->filter !== 'followed') {
-            $this->filterName = collect($this->games)->where('id', $this->filter)->first()['name'];
-        }
-
-        $this->getStreams($twitch);
-    }
-
-    public function filterByHighlight(Twitch $twitch)
-    {
-        $this->filterBy($twitch, $this->filteredGames[$this->highlightIndex]['id']);
-    }
-
-    public function loadMore(Twitch $twitch, $cursor)
-    {
-        $this->getStreams($twitch, $cursor);
     }
 
     public function render()
     {
-        return view('livewire.streams');
+        return view('livewire.followed');
     }
 }

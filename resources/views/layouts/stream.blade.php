@@ -10,6 +10,8 @@
     <title>{{ $stream }} - Twitchls</title>
 
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    @livewireStyles
+
 </head>
 
 <body class="font-sans antialiased dark:bg-black">
@@ -18,6 +20,7 @@
 
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script src="{{ mix('/js/app.js') }}"></script>
+    @livewireScripts
 </body>
 
 </html>

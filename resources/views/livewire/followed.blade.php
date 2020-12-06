@@ -1,4 +1,4 @@
-@if (Auth::user() && Auth::user()->settings['followed'])
+@if (Auth::user())
 
 <div wire:poll.60s class="relative w-12 dark:bg-gray-900" x-data="{ show: false }" x-on:mouseenter="show = true"
     x-on:mouseleave="show = false">

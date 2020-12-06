@@ -17,6 +17,7 @@
         "laravel/socialite": "^5.1",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.3",
+        "predis/predis": "^1.1",
         "romanzipp/laravel-twitch": "^3.0",
         "socialiteproviders/twitch": "^5.3"
     },

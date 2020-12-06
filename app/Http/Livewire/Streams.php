@@ -140,6 +140,10 @@ class Streams extends Component
 
     public function filterByHighlight(Twitch $twitch)
     {
+        if (count($this->filteredGames) === 0) {
+            return;
+        }
+
         $this->filterBy($twitch, $this->filteredGames[$this->highlightIndex]['id']);
     }
 

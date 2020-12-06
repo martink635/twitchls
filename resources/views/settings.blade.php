@@ -5,7 +5,7 @@
 
     <x-title>Settings</x-title>
 
-    <p class="text-sm italic">Once logged in you can save some settings that will persist to your user.</p>
+    <p class="text-sm italic">Once logged in you configure some settings that will persist to your user account.</p>
 
     <livewire:settings />
 

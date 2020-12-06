@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    @include('analytics')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -20,7 +21,6 @@
 </head>
 
 <body class="font-sans antialiased text-black dark:bg-black dark:text-white">
-
     <div class="w-full h-1 bg-teal-500"></div>
 
     <header class="flex flex-col justify-between max-w-6xl px-4 py-10 mx-auto sm:px-6 sm:flex-row">

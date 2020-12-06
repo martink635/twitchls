@@ -10,6 +10,25 @@
 
     <title>Twitchls - Alternative Twitch.tv listing</title>
 
+    <!-- Primary Meta Tags -->
+    <title>Twitchls - Alternative Twitch.tv listing</title>
+    <meta name="title" content="Twitchls - Alternative Twitch.tv listing">
+    <meta name="description" content="">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://twitchls.com/">
+    <meta property="og:title" content="Twitchls - Alternative Twitch.tv listing">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="https://twitchls.com/og.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://twitchls.com/">
+    <meta property="twitter:title" content="Twitchls - Alternative Twitch.tv listing">
+    <meta property="twitter:description" content="">
+    <meta property="twitter:image" content="https://twitchls.com/og.png">
+
     <link rel="icon" href="favicon.svg">
     <link rel="mask-icon" href="favicon-mask.svg" color="#38B2AC">
 

@@ -6,9 +6,11 @@ use Livewire\Component;
 use romanzipp\Twitch\Twitch;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use App\Http\Livewire\Traits\FormatStreamsTrait;
 
 class Streams extends Component
 {
+    use FormatStreamsTrait;
 
     public $streams = [];
     public $games = [];
@@ -99,34 +101,7 @@ class Streams extends Component
 
         $cache = Cache::remember(
             $cacheKey, 120, function () use ($query) {
-                $result = $this->twitch->getStreams($query);
-
-                return [
-                    'next' => $result->hasMoreResults(),
-                    'cursor' => $result->paginator->cursor(),
-                    'streams' => collect(
-                        $result->data()
-                    )->map(
-                        function ($item) {
-                            $item->thumbnail_352 = str_replace('{width}', '352', $item->thumbnail_url);
-                            $item->thumbnail_352 = str_replace('{height}', '198', $item->thumbnail_352);
-
-                            $item->thumbnail_480 = str_replace('{width}', '480', $item->thumbnail_url);
-                            $item->thumbnail_480 = str_replace('{height}', '270', $item->thumbnail_480);
-
-                            $item->thumbnail_640 = str_replace('{width}', '640', $item->thumbnail_url);
-                            $item->thumbnail_640 = str_replace('{height}', '360', $item->thumbnail_640);
-
-                            $item->thumbnail_768 = str_replace('{width}', '768', $item->thumbnail_url);
-                            $item->thumbnail_768 = str_replace('{height}', '432', $item->thumbnail_768);
-
-                            $item->thumbnail_url = str_replace('{width}', '960', $item->thumbnail_url);
-                            $item->thumbnail_url = str_replace('{height}', '540', $item->thumbnail_url);
-
-                            return collect($item)->toArray();
-                        }
-                    ),
-                ];
+                return $this->formatStreams($this->twitch->getStreams($query));
             }
         );
 

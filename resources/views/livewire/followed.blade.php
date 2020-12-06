@@ -24,7 +24,7 @@
                 <div class="font-bold truncate">{{ $stream['user_name'] }}</div>
                 <div class="text-xs truncate">{{ $stream['game_name'] }}</div>
             </div>
-            <div class="flex items-center justify-end flex-shrink-0 w-10">{{ $stream['viewer_count_formatted'] }}</div>
+            <div class="flex items-center justify-end flex-shrink-0 w-10">{{ $stream['viewer_count'] }}</div>
         </a>
         @endforeach
     </div>

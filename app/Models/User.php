@@ -32,4 +32,8 @@ class User extends Authenticatable
         'token',
         'refresh_token',
     ];
+
+    protected $casts = [
+        'settings' => 'array'
+    ];
 }

@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email');
             $table->string('token');
             $table->string('refresh_token');
-            $table->json('options')->nullable();
+            $table->json('settings')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

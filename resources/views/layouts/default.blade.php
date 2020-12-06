@@ -34,6 +34,7 @@
             @endguest
 
             @auth
+            <x-primary href="{{ route('settings') }}">Settings</x-primary>
             <x-primary href="{{ route('logout') }}">Log out</x-primary>
             @endauth
         </div>

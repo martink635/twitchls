@@ -1,1 +1,226 @@
-(()=>{var t={80:()=>{window.stream=function(){var t,e=null!==(t=localStorage.getItem("chat-width"))&&void 0!==t?t:375;return{dragging:!1,chatWidth:isNaN(e)?375:parseInt(e),tempChatWidth:375,startDrag:!1,chat:!0,mode:window.matchMedia("(prefers-color-scheme: dark)").matches?"&darkpopout":"",init:function(){this.$refs.chat.style.width=this.chatWidth+"px"},toggleChat:function(){this.chat=!this.chat},dragStart:function(t){this.dragging=!0,this.startDrag=t.pageX},dragMove:function(t){this.dragging&&(this.tempChatWidth=this.chatWidth+this.startDrag-t.pageX,this.$refs.chat.style.width=this.tempChatWidth+"px")},dragStop:function(){this.dragging=!1,this.chatWidth=this.tempChatWidth,localStorage.setItem("chat-width",this.chatWidth)},toggleFullscreen:function(){document.fullscreenElement||document.webkitFullscreenElement?document.exitFullscreen?document.exitFullscreen():document.webkitExitFullscreen&&document.webkitExitFullscreen():document.documentElement.requestFullscreen?document.documentElement.requestFullscreen():document.documentElement.webkitRequestFullscreen&&document.documentElement.webkitRequestFullscreen(document.ALLOW_KEYBOARD_INPUT)}}}},662:()=>{}},e={};function n(r){if(e[r])return e[r].exports;var i=e[r]={exports:{}};return t[r](i,i.exports,n),i.exports}n.m=t,n.o=(t,e)=>Object.prototype.hasOwnProperty.call(t,e),(()=>{var t={773:0},e=[[80],[662]],r=()=>{};function i(){for(var r,i=0;i<e.length;i++){for(var h=e[i],a=!0,s=1;s<h.length;s++){var c=h[s];0!==t[c]&&(a=!1)}a&&(e.splice(i--,1),r=n(n.s=h[0]))}return 0===e.length&&(n.x(),n.x=()=>{}),r}n.x=()=>{n.x=()=>{},a=a.slice();for(var t=0;t<a.length;t++)h(a[t]);return(r=i)()};var h=i=>{for(var h,a,[c,o,u,l]=i,d=0,m=[];d<c.length;d++)a=c[d],n.o(t,a)&&t[a]&&m.push(t[a][0]),t[a]=0;for(h in o)n.o(o,h)&&(n.m[h]=o[h]);for(u&&u(n),s(i);m.length;)m.shift()();return l&&e.push.apply(e,l),r()},a=self.webpackChunk=self.webpackChunk||[],s=a.push.bind(a);a.push=h})(),n.x()})();
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./resources/js/app.js":
+/*!*****************************!*\
+  !*** ./resources/js/app.js ***!
+  \*****************************/
+/*! unknown exports (runtime-defined) */
+/*! runtime requirements:  */
+/***/ (() => {
+
+window.stream = function () {
+  var _localStorage$getItem;
+
+  var defaultWidth = 375;
+  var width = (_localStorage$getItem = localStorage.getItem('chat-width')) !== null && _localStorage$getItem !== void 0 ? _localStorage$getItem : defaultWidth;
+  return {
+    dragging: false,
+    chatWidth: isNaN(width) ? defaultWidth : parseInt(width),
+    tempChatWidth: defaultWidth,
+    startDrag: false,
+    chat: true,
+    mode: window.matchMedia('(prefers-color-scheme: dark)').matches ? '&darkpopout' : '',
+    init: function init() {
+      this.$refs.chat.style.width = this.chatWidth + 'px';
+    },
+    toggleChat: function toggleChat() {
+      this.chat = !this.chat;
+    },
+    dragStart: function dragStart($event) {
+      this.dragging = true;
+      this.startDrag = $event.pageX;
+    },
+    dragMove: function dragMove($event) {
+      if (this.dragging) {
+        this.tempChatWidth = this.chatWidth + this.startDrag - $event.pageX;
+        this.$refs.chat.style.width = this.tempChatWidth + 'px';
+      }
+    },
+    dragStop: function dragStop() {
+      this.dragging = false;
+      this.chatWidth = this.tempChatWidth;
+      localStorage.setItem('chat-width', this.chatWidth);
+    },
+    toggleFullscreen: function toggleFullscreen() {
+      if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen();
+        } else if (document.documentElement.webkitRequestFullscreen) {
+          document.documentElement.webkitRequestFullscreen(document.ALLOW_KEYBOARD_INPUT);
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+      }
+    }
+  };
+};
+
+/***/ }),
+
+/***/ "./resources/css/app.css":
+/*!*******************************!*\
+  !*** ./resources/css/app.css ***!
+  \*******************************/
+/*! namespace exports */
+/*! exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__.r, __webpack_exports__, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		if(__webpack_module_cache__[moduleId]) {
+/******/ 			return __webpack_module_cache__[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop)
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		// no baseURI
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// Promise = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"/js/app": 0
+/******/ 		};
+/******/ 		
+/******/ 		var deferredModules = [
+/******/ 			["./resources/js/app.js"],
+/******/ 			["./resources/css/app.css"]
+/******/ 		];
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		var checkDeferredModules = () => {
+/******/ 		
+/******/ 		};
+/******/ 		function checkDeferredModulesImpl() {
+/******/ 			var result;
+/******/ 			for(var i = 0; i < deferredModules.length; i++) {
+/******/ 				var deferredModule = deferredModules[i];
+/******/ 				var fulfilled = true;
+/******/ 				for(var j = 1; j < deferredModule.length; j++) {
+/******/ 					var depId = deferredModule[j];
+/******/ 					if(installedChunks[depId] !== 0) fulfilled = false;
+/******/ 				}
+/******/ 				if(fulfilled) {
+/******/ 					deferredModules.splice(i--, 1);
+/******/ 					result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
+/******/ 				}
+/******/ 			}
+/******/ 			if(deferredModules.length === 0) {
+/******/ 				__webpack_require__.x();
+/******/ 				__webpack_require__.x = () => {
+/******/ 		
+/******/ 				}
+/******/ 			}
+/******/ 			return result;
+/******/ 		}
+/******/ 		__webpack_require__.x = () => {
+/******/ 			// reset startup function so it can be called again when more startup code is added
+/******/ 			__webpack_require__.x = () => {
+/******/ 		
+/******/ 			}
+/******/ 			chunkLoadingGlobal = chunkLoadingGlobal.slice();
+/******/ 			for(var i = 0; i < chunkLoadingGlobal.length; i++) webpackJsonpCallback(chunkLoadingGlobal[i]);
+/******/ 			return (checkDeferredModules = checkDeferredModulesImpl)();
+/******/ 		};
+/******/ 		
+/******/ 		// install a JSONP callback for chunk loading
+/******/ 		var webpackJsonpCallback = (data) => {
+/******/ 			var [chunkIds, moreModules, runtime, executeModules] = data;
+/******/ 			// add "moreModules" to the modules object,
+/******/ 			// then flag all "chunkIds" as loaded and fire callback
+/******/ 			var moduleId, chunkId, i = 0, resolves = [];
+/******/ 			for(;i < chunkIds.length; i++) {
+/******/ 				chunkId = chunkIds[i];
+/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 					resolves.push(installedChunks[chunkId][0]);
+/******/ 				}
+/******/ 				installedChunks[chunkId] = 0;
+/******/ 			}
+/******/ 			for(moduleId in moreModules) {
+/******/ 				if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 					__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 				}
+/******/ 			}
+/******/ 			if(runtime) runtime(__webpack_require__);
+/******/ 			parentChunkLoadingFunction(data);
+/******/ 			while(resolves.length) {
+/******/ 				resolves.shift()();
+/******/ 			}
+/******/ 		
+/******/ 			// add entry modules from loaded chunk to deferred list
+/******/ 			if(executeModules) deferredModules.push.apply(deferredModules, executeModules);
+/******/ 		
+/******/ 			// run deferred modules when all chunks ready
+/******/ 			return checkDeferredModules();
+/******/ 		}
+/******/ 		
+/******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];
+/******/ 		var parentChunkLoadingFunction = chunkLoadingGlobal.push.bind(chunkLoadingGlobal);
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback;
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	// run startup
+/******/ 	return __webpack_require__.x();
+/******/ })()
+;

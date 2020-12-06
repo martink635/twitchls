@@ -9,6 +9,9 @@
 
     <title>{{ $stream }} - Twitchls</title>
 
+    <link rel="icon" href="favicon.svg">
+    <link rel="mask-icon" href="favicon-mask.svg" color="#38B2AC">
+
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     @livewireStyles
 

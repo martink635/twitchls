@@ -18,7 +18,7 @@ class Settings extends Component
 
         $this->user= Auth::user();
 
-        if (array_key_exists('followed', $this->user->settings)) {
+        if (!is_null($this->user->settings) && array_key_exists('followed', $this->user->settings)) {
             $this->followed = $this->user->settings['followed'];
         }
     }
@@ -26,7 +26,7 @@ class Settings extends Component
     public function toggleFollowed()
     {
         $this->followed = !$this->followed;
-        $this->user->settings = \array_merge($this->user->settings, ['followed' => $this->followed]);
+        $this->user->settings = \array_merge($this->user->settings ?? [], ['followed' => $this->followed]);
         $this->user->save();
     }
 

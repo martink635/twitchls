@@ -1,4 +1,4 @@
-@if (Auth::user())
+@if (Auth::user() && !is_null(Auth::user()->settings) && Auth::user()->settings['followed'])
 
 <div wire:poll.60s class="relative w-12 dark:bg-gray-900" x-data="{ show: false }" x-on:mouseenter="show = true"
     x-on:mouseleave="show = false">
@@ -24,7 +24,8 @@
                 <div class="font-bold truncate">{{ $stream['user_name'] }}</div>
                 <div class="text-xs truncate">{{ $stream['game_name'] }}</div>
             </div>
-            <div class="flex items-center justify-end flex-shrink-0 w-10">{{ $stream['viewer_count'] }}</div>
+            <div class="flex items-center justify-end flex-shrink-0 w-10">
+                {{ $stream['viewer_count_formatted'] ?? $stream['viewer_count'] }}</div>
         </a>
         @endforeach
     </div>

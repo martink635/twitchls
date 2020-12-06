@@ -26,12 +26,26 @@ trait FormatStreamsTrait
 
                     $item->thumbnail_url = str_replace('{width}', '960', $item->thumbnail_url);
                     $item->thumbnail_url = str_replace('{height}', '540', $item->thumbnail_url);
+
+                    $item->user_name = $this->formatUserName($item->user_name);
                     $item->viewer_count_formatted = $this->formatViewers($item->viewer_count);
 
                     return collect($item)->toArray();
                 }
             ),
         ];
+    }
+
+    /**
+     * Due to a weird implementation, helix api returns display names instead of
+     * user names. We remove the spaces and semicolons, from the display name.
+     * This fixes some channels, not all of them
+     *
+     * https://github.com/twitchdev/issues/issues/3
+     */
+    private function formatUserName($name)
+    {
+        return str_replace([' ', ':'], '', $name);
     }
 
     private function formatViewers($count)

@@ -1,10 +1,6 @@
-# Next version
+# twitchls v2
 
-WIP
-
-# twitchls
-
-Watch Twitch streams via HLS. Works on Safari 6+ (5+ for iOS), Chrome for Android 30+ and Edge on Windows 10. If the used browser does not support HLS it loads the stream via an experimental HTML5 Twitch.tv feature (tested on latest Chrome and Firefox). If this feature is disabled, Flash is used. Built using [Laravel 8](https://laravel.com/), [Alpine.js](https://github.com/alpinejs/alpine) and [TailwindCSS](https://tailwindcss.com/).
+Alternative Twitch.tv listing, with a limited set of features. Historically this was used to force Twitch.tv streams in HLS mode for a better experience on MacOS Safari. Built using [Laravel 8](https://laravel.com/), [Livewire](https://laravel-livewire.com/), [Alpine.js](https://github.com/alpinejs/alpine) and [TailwindCSS](https://tailwindcss.com/).
 
 This application is running on [twitchls.com](https://twitchls.com).
 
@@ -18,7 +14,7 @@ npm install
 npm run dev
 
 # For production
-npm run build
+npm run prod
 
 # Tests
 vendor/bin/phpunit

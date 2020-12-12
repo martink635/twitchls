@@ -80,12 +80,17 @@ class Streams extends Component
             $id = Auth::id();
 
             $follows = Cache::remember(
-                "followed_users_{$id}", 300, function () {
-                    $result = $this->twitch->getUsersFollows(['from_id' => Auth::id(), 'first' => 100]);
+                "followed_users_{$id}", 0, function () {
+                    $cursor = null;
+                    $data = [];
 
-                    return collect(
-                        $result->data()
-                    )->map(
+                    do {
+                        $result = $this->twitch->getUsersFollows(['from_id' => Auth::id(), 'first' => 100], $cursor);
+                        array_push($data, ...$result->data());
+                        $cursor = $result->next();
+                    } while ($result->hasMoreResults());
+
+                    return collect($data)->map(
                         function ($item) {
                             return $item->to_id;
                         }
@@ -93,6 +98,7 @@ class Streams extends Component
                 }
             );
 
+            $query['first'] = 100;
             $query['user_id'] = $follows;
             $cacheKey = "streams_{$cursor}_{$id}";
         } else {

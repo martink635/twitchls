@@ -36,7 +36,7 @@ class Streams extends Component
 
         $this->games = Cache::remember(
             'games', 180, function () {
-                $result = $this->twitch->getTopGames(['first' => 50]);
+                $result = $this->twitch->getTopGames(['first' => 100]);
 
                 return collect(
                     $result->data()

@@ -19,7 +19,8 @@
             @endforeach
         </nav>
 
-        {{-- <x-dropdown :items="$games" class="lg:w-1/3" /> --}}
+        {{--
+        <x-dropdown :items="$games" class="lg:w-1/3" /> --}}
         <div x-data="{ open: false }" class="w-full mt-4 lg:mt-0 lg:w-1/3">
 
             <div x-show="open" class="fixed inset-0 z-10 w-full h-screen bg-gray-500 opacity-25"></div>
@@ -80,7 +81,8 @@
 
         @foreach ($streams as $stream)
         <a href="{{ route('stream', ['stream' => $stream['user_name']]) }}"
-            class="relative flex flex-col justify-end overflow-hidden duration-150 rounded-lg cursor-pointer ransition group">
+            class="relative flex flex-col justify-end overflow-hidden duration-150 rounded-lg cursor-pointer ransition group"
+            title="{{ $stream['title'] }}">
             <img class="w-full" src="{{ $stream['thumbnail_480'] }}"
                 alt="{{ $stream['user_name'] }} streaming {{ $stream['game_name'] }}">
 

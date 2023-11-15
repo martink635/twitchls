@@ -19,7 +19,7 @@
     },
     "dependencies": {
         "autoprefixer": "^10.3.1",
-        "postcss": "^8.3.6",
+        "postcss": "^8.4.31",
         "tailwindcss": "^2.2.7"
     }
 }
